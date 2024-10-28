@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminEmailsController;
 use App\Http\Controllers\Admin\VideosController;
 use App\Http\Controllers\User\DocumentsController;
 use App\Http\Controllers\User\EmailsController;
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('documents')->name('documents.')->controller(AdminDocumentsController::class)->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('show', 'show')->name('show');
+        });
+
+        Route::prefix('emails')->name('emails.')->controller(AdminEmailsController::class)->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('show', 'show')->name('show');
         });

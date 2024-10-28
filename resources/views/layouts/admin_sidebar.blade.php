@@ -2,7 +2,8 @@
     <div class="navbar-brand-box">
         <a href="#" class="logo logo-light">
             <span class="logo-lg">
-                <img src="{{ URL::asset('images/logos/logo.png') }}" height="40">
+                {{-- <img src="{{ URL::asset('images/logos/logo.png') }}" height="40"> --}}
+                <h3 class="text-white">Monday Club</h3>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -48,6 +49,15 @@
                     <a class="nav-link menu-link {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}"
                         href="{{ route('admin.documents.index') }}">
                         <i class="mdi mdi-file-document-outline"></i> <span>Documents</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('admin/emails') || request()->is('admin/emails/*') ? 'active' : '' }}"
+                        href="{{ route('admin.emails.index') }}">
+                        <i class="mdi mdi-file-document-outline"></i> <span>Emails</span>
                     </a>
                 </li>
             </ul>

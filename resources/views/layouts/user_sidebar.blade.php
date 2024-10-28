@@ -2,7 +2,8 @@
     <div class="navbar-brand-box">
         <a href="#" class="logo logo-light">
             <span class="logo-lg">
-                <img src="{{ URL::asset('images/logos/logo.png') }}" height="40">
+                {{-- <img src="{{ URL::asset('images/logos/logo.png') }}" height="40"> --}}
+                <h3 class="text-white">Monday Club</h3>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"

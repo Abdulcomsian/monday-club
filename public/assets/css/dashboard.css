@@ -1,3 +1,8 @@
 .font-weight-bold {
     font-weight: bold;
 }
+
+thead, tbody, tfoot, tr, td, th {
+    border-style: none; /* Remove the solid border */
+  }
+

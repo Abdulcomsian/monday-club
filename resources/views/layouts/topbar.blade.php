@@ -19,6 +19,8 @@
                     </span>
                 </button>
 
+                <h3 class="mt-4">@yield('header')</h3>
+
                 <!-- App Search-->
                 {{-- <form class="app-search d-none d-md-block">
                     <div class="position-relative">
