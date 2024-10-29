@@ -16,19 +16,19 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Title:</div>
-                                <div class="col-md-9">ANCHOR POINT</div>
+                                <div class="col-md-9">{{ $data->title }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Description:</div>
-                                <div class="col-md-9">ANCHOR POINT / SAFETY LINE (PERMANENT)</div>
+                                <div class="col-md-9">{!! $data->description !!}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Video:</div>
                                 <div class="col-md-9">
-                                    <video width="100%" controls>
-                                        <source src="path-to-video.mp4" type="video/mp4">
+                                    <video width="50%" controls>
+                                        <source src="{{ asset($data->file) }}" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>

@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\MediaServices;
+use App\Http\Controllers\Controller;
 
 class VideosController extends Controller
 {
+    protected $mediaServices;
+    public function __construct(MediaServices  $mediaServices)
+    {
+        $this->mediaServices = $mediaServices;
+    }
     function index()
     {
-        return view('user.videos.index');
+        $data = $this->mediaServices->index();
+        return view('user.videos.index', compact('data'));
     }
 
-    function show()
+    function show($id)
     {
-        return view('user.videos.show');
+        $data = $this->mediaServices->show($id);
+        return view('user.videos.show', compact('data'));
     }
 }

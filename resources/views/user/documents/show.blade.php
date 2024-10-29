@@ -16,20 +16,24 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Title:</div>
-                                <div class="col-md-9">ANCHOR POINT</div>
+                                <div class="col-md-9">{{ $data->title }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Description:</div>
-                                <div class="col-md-9">ANCHOR POINT / SAFETY LINE (PERMANENT)</div>
+                                <div class="col-md-9">{!! $data->description !!}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Document:</div>
                                 <div class="col-md-9">
-                                    <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                                        width="100%" height="500px" frameborder="0">
-                                    </iframe>
+                                    @if ($data->file)
+                                        <iframe src="{{ asset($data->file) }}" width="100%" height="500px" frameborder="0">
+                                            Your browser does not support iframes.
+                                        </iframe>
+                                    @else
+                                        <p>No document available.</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

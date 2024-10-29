@@ -6,3 +6,35 @@ thead, tbody, tfoot, tr, td, th {
     border-style: none; /* Remove the solid border */
   }
 
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--vz-header-bg) !important;
+}
+
+#page-topbar {
+    background-color: var(--vz-body-bg) !important;
+}
+
+.bordered-dropdown {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.topbar-user .btn {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.topbar-user .btn:hover {
+    background-color: #f8f9fa;
+}
+
+

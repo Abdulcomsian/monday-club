@@ -31,6 +31,25 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+                    <div class="container">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                    </div>
                     @yield('content')
                 </div>
             </div>

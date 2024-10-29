@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
+use App\Services\MediaServices;
+use App\Http\Requests\MediaRequest;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class VideosController extends Controller
 {
+    protected $mediaServices;
+    public function __construct(MediaServices  $mediaServices)
+    {
+        $this->mediaServices = $mediaServices;
+    }
     function index()
     {
-        return view('admin.videos.index');
+        $data = $this->mediaServices->index();
+        return view('admin.videos.index', compact('data'));
     }
 
     function create()
@@ -17,13 +26,57 @@ class VideosController extends Controller
         return view('admin.videos.create');
     }
 
-    function show()
+    function store(MediaRequest $request)
     {
-        return view('admin.videos.show');
+        try {
+            $this->mediaServices->store($request->validated());
+
+            return redirect()->route('admin.videos.index')
+                ->with('success', 'Media stored successfully.');
+        } catch (Exception $e) {
+            Log::error('Error storing media: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Failed to store media.']);
+        }
     }
 
-    function edit()
+    function show($id)
     {
-        return view('admin.videos.edit');
+        $data = $this->mediaServices->show($id);
+        return view('admin.videos.show', compact('data'));
+    }
+
+    function edit($id)
+    {
+        $data = $this->mediaServices->edit($id);
+        return view('admin.videos.edit', compact('data'));
+    }
+
+    function update(MediaRequest $request, $id)
+    {
+        try {
+            $this->mediaServices->update($request->validated(), $id);
+
+            return redirect()->route('admin.videos.index')
+                ->with('success', 'Media updated successfully.');
+        } catch (Exception $e) {
+            Log::error('Error updating media: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Failed to update media.']);
+        }
+    }
+
+    function destroy($id)
+    {
+        try {
+            $this->mediaServices->destroy($id);
+
+            return redirect()->route('admin.videos.index')
+                ->with('success', 'Media deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error deleting media: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Failed to delete media.']);
+        }
     }
 }

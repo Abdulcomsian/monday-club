@@ -25,18 +25,21 @@ Route::middleware('auth')->group(function () {
         Route::prefix('videos')->name('videos.')->controller(VideosController::class)->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('create', 'create')->name('create');
-            Route::get('show', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('contacts')->name('contacts.')->controller(AdminContactsController::class)->group(function () {
             Route::get('index', 'index')->name('index');
-            Route::get('show', 'show')->name('show');
+            Route::get('show/{id}', 'show')->name('show');
         });
 
         Route::prefix('documents')->name('documents.')->controller(AdminDocumentsController::class)->group(function () {
             Route::get('index', 'index')->name('index');
-            Route::get('show', 'show')->name('show');
+            Route::get('show/{id}', 'show')->name('show');
         });
 
         Route::prefix('emails')->name('emails.')->controller(AdminEmailsController::class)->group(function () {
@@ -51,21 +54,27 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('videos')->name('videos.')->controller(UserVideosController::class)->group(function () {
             Route::get('index', 'index')->name('index');
-            Route::get('show', 'show')->name('show');
+            Route::get('show/{id}', 'show')->name('show');
         });
 
         Route::prefix('contacts')->name('contacts.')->controller(ContactsController::class)->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('create', 'create')->name('create');
-            Route::get('show', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('documents')->name('documents.')->controller(DocumentsController::class)->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('create', 'create')->name('create');
-            Route::get('show', 'show')->name('show');
-            Route::get('edit', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('emails')->name('emails.')->controller(EmailsController::class)->group(function () {

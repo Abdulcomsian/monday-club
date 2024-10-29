@@ -11,8 +11,9 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.contacts.update', $data->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 d-flex flex-column">
@@ -20,7 +21,7 @@
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" name="name" placeholder="name here...">
+                                    <input type="text" class="form-control" name="name" value="{{ $data->name }}" placeholder="name here...">
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
@@ -28,7 +29,7 @@
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="email" class="form-control" name="email" placeholder="email here...">
+                                    <input type="email" class="form-control" name="email" value="{{ $data->email }}" placeholder="email here...">
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
@@ -36,9 +37,8 @@
                                     @error('contact')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="number" class="form-control" name="contact" placeholder="contact here...">
+                                    <input type="number" class="form-control" name="contact" value="{{ $data->contact_no }}" placeholder="contact here...">
                                 </div>
-
                                 <div class="col-xl-6 d-flex flex-column">
                                     <label for="status" class="form-label required">Status</label>
                                     @error('status')
@@ -46,11 +46,9 @@
                                     @enderror
                                     <select name="status" id="statusSelect" class="form-select" required>
                                         <option value="">Select Status</option>
-                                        <option value="contacted">Contacted</option>
-                                        <option value="not_contacted">Not Contacted</option>
-                                        <option value="positive_reply">Positive Reply</option>
-                                        <option value="negative_reply">Negative Reply</option>
-                                        <option value="donated">Donated</option>
+                                        @foreach (['contacted', 'not_contacted', 'positive_reply', 'negative_reply', 'donated'] as $status)
+                                            <option value="{{ $status }}" {{ $data->status === $status ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $status)) }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -59,12 +57,12 @@
                                     @error('note')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <textarea name="note" class="form-control" id="editor"></textarea>
+                                    <textarea name="note" class="form-control" id="editor">{!! $data->note !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4 text-right">
                                 <div class="col-xl-12">
-                                    <button type="button" class="btn btn-sm btn-primary">
+                                    <button type="submit" class="btn btn-sm btn-primary">
                                         <i class="far fa-save icon"></i> Save
                                     </button>
                                     <button type="button" class="btn btn-sm btn-light">

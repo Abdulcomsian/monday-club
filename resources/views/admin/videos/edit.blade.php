@@ -12,27 +12,37 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-12">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.videos.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-xl-6 d-flex flex-column">
+                                    <div class="col-xl-4 d-flex flex-column">
                                         <label for="" class="form-label required">Title</label>
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                         <input type="text" class="form-control" name="title"
+                                        value="{{ $data->title }}"
                                             placeholder="title here...">
                                     </div>
 
-                                    <div class="col-xl-6 d-flex flex-column">
+                                    <div class="col-xl-4 d-flex flex-column">
                                         <label for="" class="form-label">Upload Video</label>
-                                        @error('companyImage')
+                                        @error('video_file')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <input class="form-control" type="file" name="companyImage" value="">
+                                        <input class="form-control" type="file" name="video_file" value="{{ $data->file }}">
                                         <small class="text-danger">Note: Only mp4, avi, mov, and mkv formats are
                                             allowed.</small>
+                                    </div>
+
+                                    <div class="col-xl-4 d-flex flex-column">
+                                        <label for="" class="form-label">Upload Video</label>
+                                        <video width="50%" controls>
+                                            <source src="{{ asset($data->file) }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
                                     </div>
 
                                     <div class="col-xl-12">
@@ -40,12 +50,12 @@
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <textarea name="description" class="form-control" id="editor"></textarea>
+                                        <textarea name="description" class="form-control" id="editor">{!! $data->description !!}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-4 text-right">
                                     <div class="col-xl-12">
-                                        <button type="button" class="btn btn-sm btn-primary">
+                                        <button type="submit" class="btn btn-sm btn-primary">
                                             <i class="far fa-save icon"></i> Save
                                         </button>
                                         <button type="button" class="btn btn-sm btn-light">

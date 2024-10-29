@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.documents.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -43,7 +43,7 @@
                             </div>
                             <div class="row mt-4 text-right">
                                 <div class="col-xl-12">
-                                    <button type="button" class="btn btn-sm btn-primary">
+                                    <button type="submit" class="btn btn-sm btn-primary">
                                         <i class="far fa-save icon"></i> Save
                                     </button>
                                     <button type="button" class="btn btn-sm btn-light">
