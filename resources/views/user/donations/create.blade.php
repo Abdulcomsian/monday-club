@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Documents')
-@section('header', 'Create')
+@section('title', 'Videos')
+@section('header', 'Show')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="container-fluid fluid">
@@ -11,34 +11,37 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="{{ route('user.documents.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.donations.store') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label required">Title</label>
-                                    @error('title')
+                                    <label for="contactSelect" class="form-label required">Contact</label>
+                                    @error('contact_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" name="title"
-                                        placeholder="title here...">
+                                    <select name="contact_id" id="contactSelect" class="form-select" required>
+                                        <option value="">Select Contact</option>
+                                        @foreach ($data as $value)
+                                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Document</label>
-                                    @error('document')
+                                    <label for="amount" class="form-label required">Amount</label>
+                                    @error('amount')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input class="form-control" type="file" name="document" accept=".pdf" value="">
-                                    <small class="text-danger">Note: Only PDF files are allowed.</small>
+                                    <input type="number" class="form-control" name="amount" placeholder="amount here...">
                                 </div>
 
                                 <div class="col-xl-12">
-                                    <label for="" class="form-label">Description</label>
-                                    @error('description')
+                                    <label for="" class="form-label">Note</label>
+                                    @error('note')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <textarea name="description" class="form-control" id="editor"></textarea>
+                                    <textarea name="note" class="form-control" id="editor"></textarea>
                                 </div>
                             </div>
                             <div class="row mt-4 text-right">
@@ -64,10 +67,17 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                removePlugins: [ 'BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
+                removePlugins: ['BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
             })
             .catch(error => {
                 console.error(error);
             });
+
+        $(document).ready(function() {
+            $("#contactSelect").select2({
+                width: '100%',
+                height: '100%',
+            });
+        });
     </script>
 @endsection

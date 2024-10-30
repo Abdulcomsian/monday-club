@@ -12,80 +12,88 @@
                         <th class="text-center">Recipient Email</th>
                         <th class="text-center">Subject</th>
                         <th class="text-center">Message</th>
-                        <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="no-records">
-                        <td class="text-center">1</td>
-                        <td class="text-center">tomcruise@gmail.com</td>
-                        <td class="text-center">Funding Email</td>
-                        <td class="text-center">
-                            <p>
-                                Lorem Ipsum is simply dummy
-                            </p>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge bg-success">Contacted</span>
-                            <!-- <span class="badge bg-secondary">Not Contacted</span> -->
-                            <!-- <span class="badge bg-info">Positive Reply</span> -->
-                            <!-- <span class="badge bg-danger">Negative Reply</span> -->
-                            <!-- <span class="badge bg-primary">Donated</span> -->
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ route('user.emails.show') }}">
-                                <button class="btn btn-sm btn-primary">
-                                    <i class="mdi mdi-eye"></i> View
-                                </button>
-                            </a>
-
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#emailModal">
-                                <button class="btn btn-sm btn-info">
-                                    <i class="mdi mdi-pencil"></i> Edit
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
+                    @isset($data)
+                        @foreach ($data as $key => $value)
+                            <tr class="no-records">
+                                <td class="text-center">{{ $key + 1 }}</td>
+                                <td class="text-center">{{ $value->contact->email }}</td>
+                                <td class="text-center">{{ $value->subject }}</td>
+                                <td class="text-center">
+                                    @php
+                                        $fullMessage = $value->message;
+                                    @endphp
+                                    {!! Str::words(
+                                        $value->message,
+                                        10,
+                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#messageModal" data-message="' .
+                                            htmlspecialchars($fullMessage, ENT_QUOTES) .
+                                            '">Read More</a>',
+                                    ) !!}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('user.sent_emails.show', $value->id) }}">
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="mdi mdi-eye"></i> View
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endisset
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <!-- Delete Modal -->
+    <div class="modal fade bs-delete-modal-center" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="deleteForm" action="{{ route('user.sent_emails.destroy', ['id' => '__ID__']) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="NotificationModalbtn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mt-2 text-center">
+                            <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                                colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                            <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                <h4>Are you sure?</h4>
+                                <p class="text-muted mx-4 mb-0">Are you sure you want to delete this listing?</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                            <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn w-sm" style="background-color: #E30B0B !important;color:#fff;"
+                                id="delete-notification">Yes,
+                                Delete It!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="emailModalLabel">Send Email</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="messageModalLabel">Complete Message</h5>
+                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="sendEmailForm">
-                        <div class="mb-3">
-                            <label for="recipientEmail" class="form-label">Recipient Email</label>
-                            <input type="email" class="form-control" id="recipientEmail" name="recipientEmail" placeholder="email here..." required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="emailSubject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="emailSubject" name="emailSubject" placeholder="subject here..." required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="emailBody" class="form-label">Message</label>
-                            <textarea class="form-control" id="emailBody" name="emailBody" rows="4" placeholder="message here..." required></textarea>
-                        </div>
-                    </form>
+                    <div id="modal-message-content"></div>
                 </div>
                 <div class="modal-footer">
-                    <!-- Close Button -->
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
-                        <i class="mdi mdi-close"></i> Close
-                    </button>
-
-                    <!-- Send Button -->
-                    <button type="submit" class="btn btn-sm btn-primary" form="sendEmailForm">
-                        <i class="mdi mdi-send"></i> Send
-                    </button>
-
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i
+                            class="mdi mdi-close"></i> Close</button>
                 </div>
             </div>
         </div>
@@ -102,6 +110,23 @@
                 "ordering": true,
                 "info": true,
                 "scrollX": true,
+            });
+        });
+
+        function setDeleteId(button) {
+            const dataId = button.getAttribute('data-id');
+            const deleteForm = document.getElementById('deleteForm');
+            const actionUrl = "{{ route('user.sent_emails.destroy', ['id' => '__ID__']) }}".replace('__ID__', dataId);
+            deleteForm.setAttribute('action', actionUrl);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.read-more').forEach(button => {
+                button.addEventListener('click', function() {
+                    const fullDescription = button.getAttribute('data-message');
+                    document.getElementById('modal-message-content').innerHTML =
+                        fullDescription;
+                });
             });
         });
     </script>

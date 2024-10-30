@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Media;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class MediaServices
 {
@@ -19,6 +17,7 @@ class MediaServices
     {
         return $this->model::latest()->get();
     }
+
     public function store($data)
     {
         $save = new $this->model;

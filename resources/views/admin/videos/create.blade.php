@@ -64,9 +64,7 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle',
-                    'ImageToolbar', 'ImageUpload', 'MediaEmbed'
-                ],
+                removePlugins: [ 'BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
             })
             .catch(error => {
                 console.error(error);

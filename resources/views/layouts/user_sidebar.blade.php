@@ -53,8 +53,17 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/emails') || request()->is('user/emails/*') ? 'active' : '' }}"
-                        href="{{ route('user.emails.index') }}">
+                        href="{{ route('user.sent_emails.index') }}">
                         <i class="mdi mdi-email-outline"></i> <span>Sent Emails</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('user/donations') || request()->is('user/donations/*') ? 'active' : '' }}"
+                        href="{{ route('user.donations.index') }}">
+                        <i class="mdi mdi-heart-outline"></i> <span>Donations</span>
                     </a>
                 </li>
             </ul>

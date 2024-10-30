@@ -1,17 +1,25 @@
 @extends('layouts.main')
-@section('title', 'Emails')
+@section('title', 'Donations')
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="container">
-            <table id="mytable" class="table table-bordered table-striped table-hover datatable datatable-Role cell-border"
+            <div class="d-flex mb-3">
+                <a href="{{ route('user.donations.create') }}">
+                    <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>
+                        Add New
+                    </button>
+                </a>
+            </div>
+            <table id="mytable"
+                class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
                 data-ordering="false">
                 <thead>
                     <tr style="text-wrap: nowrap;">
                         <th class="text-center">#</th>
-                        <th class="text-center">Recipient Email</th>
-                        <th class="text-center">Subject</th>
-                        <th class="text-center">Message</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Amount</th>
+                        <th class="text-center">Note</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -20,26 +28,38 @@
                         @foreach ($data as $key => $value)
                             <tr class="no-records">
                                 <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->contact->email }}</td>
-                                <td class="text-center">{{ $value->subject }}</td>
+                                <td class="text-center">{{ $value->contact->name }} <br> <small>{{ $value->contact->email }}
+                                </td>
+                                <td class="text-center">{{ number_format($value->amount, 2) }}</td>
                                 <td class="text-center">
                                     @php
-                                        $fullMessage = $value->message;
+                                        $fullNote = $value->note;
                                     @endphp
                                     {!! Str::words(
-                                        $value->message,
+                                        $value->note,
                                         10,
-                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#messageModal" data-message="' .
-                                            htmlspecialchars($fullMessage, ENT_QUOTES) .
+                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
+                                            htmlspecialchars($fullNote, ENT_QUOTES) .
                                             '">Read More</a>',
                                     ) !!}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.emails.show', $value->id) }}">
+                                    <a href="{{ route('user.donations.show', $value->id) }}">
                                         <button class="btn btn-sm btn-primary">
                                             <i class="mdi mdi-eye"></i> View
                                         </button>
                                     </a>
+                                    <a href="{{ route('user.donations.edit', $value->id) }}">
+                                        <button class="btn btn-sm btn-info">
+                                            <i class="mdi mdi-pencil"></i> Edit
+                                        </button>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                        data-bs-target=".bs-delete-modal-center" data-id="{{ $value->id }}"
+                                        onclick="setDeleteId(this)">
+                                        <i class="mdi mdi-delete"></i> Delete
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -53,7 +73,7 @@
     <div class="modal fade bs-delete-modal-center" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form id="deleteForm" action="{{ route('user.sent_emails.destroy', ['id' => '__ID__']) }}" method="POST">
+                <form id="deleteForm" action="{{ route('user.donations.destroy', ['id' => '__ID__']) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <div class="modal-header">
@@ -81,15 +101,16 @@
         </div>
     </div>
 
-    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    {{-- Note Model --}}
+    <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="messageModalLabel">Complete Message</h5>
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="noteModalLabel">Complete Note</h5>
+                    <button type="button" class="btn-close btn-m" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="modal-message-content"></div>
+                    <div id="modal-note-content"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i
@@ -105,27 +126,40 @@
     <script>
         $(document).ready(function() {
             $('#mytable').DataTable({
-                "paging": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "scrollX": true,
+                autoWidth: false,
+                responsive: true,
+                scrollX: true,
+                scrollCollapse: true,
+                pageLength: 100,
+                orderCellsTop: true,
+                order: [
+                    [1, 'desc']
+                ],
+                columnDefs: [{
+                        width: '10%',
+                        targets: 0
+                    },
+                    {
+                        orderable: false,
+                        targets: [0, 3, 4]
+                    }
+                ]
             });
         });
 
         function setDeleteId(button) {
             const dataId = button.getAttribute('data-id');
             const deleteForm = document.getElementById('deleteForm');
-            const actionUrl = "{{ route('user.sent_emails.destroy', ['id' => '__ID__']) }}".replace('__ID__', dataId);
+            const actionUrl = "{{ route('user.donations.destroy', ['id' => '__ID__']) }}".replace('__ID__', dataId);
             deleteForm.setAttribute('action', actionUrl);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.read-more').forEach(button => {
                 button.addEventListener('click', function() {
-                    const fullDescription = button.getAttribute('data-message');
-                    document.getElementById('modal-message-content').innerHTML =
-                        fullDescription;
+                    const fullNote = button.getAttribute('data-note');
+                    document.getElementById('modal-note-content').innerHTML =
+                        fullNote;
                 });
             });
         });

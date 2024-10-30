@@ -50,6 +50,19 @@
                             </div>
                         @endif
                     </div>
+
+                    <div class="toast bg-success text-white" id="successToast"
+                        style="position: absolute; top: 33px; left: 400px;" data-bs-delay="2000">
+                        <div class="toast-header">
+                            <strong class="me-auto">Success</strong>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Status updated successfully!
+                        </div>
+                    </div>
+
                     @yield('content')
                 </div>
             </div>

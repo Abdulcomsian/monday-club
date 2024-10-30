@@ -4,18 +4,35 @@
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="container">
-            <div class="d-flex mb-3">
-                <a href="{{ route('user.contacts.create') }}">
-                    <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>
-                        Add New
-                    </button>
-                </a>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ route('user.contacts.create') }}">
+                        <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>
+                            Add New
+                        </button>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <select id="statusFilter" class="form-select me-3">
+                        <option value="">Select Status</option>
+                        <option value="contracted">Contacted</option>
+                        <option value="not_contracted">Not Contacted</option>
+                        <option value="positive_reply">Positive Reply</option>
+                        <option value="negative_reply">Negative Reply</option>
+                        <option value="donated">Donated</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-sm btn-info" id="filterButton">Filter</button>
+                </div>
             </div>
             <table id="mytable"
                 class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
                 data-ordering="false">
                 <thead>
                     <tr style="text-wrap: nowrap;">
+                        <th class="text-center"><input type="checkbox" id="selectAll"></th>
                         <th class="text-center">#</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Email</th>
@@ -28,7 +45,8 @@
                 <tbody>
                     @isset($data)
                         @foreach ($data as $key => $value)
-                            <tr class="no-records">
+                            <tr class="no-records" data-id="{{ $value->id }}">
+                                <td class="text-center"><input type="checkbox" class="contact-checkbox"></td>
                                 <td class="text-center">{{ $key + 1 }}</td>
                                 <td class="text-center">{{ $value->name }}</td>
                                 <td class="text-center">{{ $value->email }}</td>
@@ -82,7 +100,9 @@
                                             <i class="mdi mdi-pencil"></i> Edit
                                         </button>
                                     </a>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#emailModal">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#emailModal"
+                                        data-user-email="{{ $value->email }}" data-recipient-id="{{ $value->id }}"
+                                        data-user-id="{{ $value->user_id }}">
                                         <button class="btn btn-sm btn-success">
                                             <i class="mdi mdi-email-outline"></i> Send Email
                                         </button>
@@ -124,8 +144,9 @@
                         </div>
                         <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                             <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn w-sm" style="background-color: #E30B0B !important;color:#fff;"
-                                id="delete-notification">Yes, Delete It!</button>
+                            <button type="submit" class="btn w-sm"
+                                style="background-color: #E30B0B !important;color:#fff;" id="delete-notification">Yes,
+                                Delete It!</button>
                         </div>
                     </div>
                 </form>
@@ -141,35 +162,34 @@
                     <h5 class="modal-title" id="emailModalLabel">Send Email</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="sendEmailForm">
+                <form action="{{ route('user.sent_emails.store') }}" method="post" id="sendEmailForm">
+                    <div class="modal-body">
+                        @csrf
                         <div class="mb-3">
                             <label for="recipientEmail" class="form-label">Recipient Email</label>
-                            <input type="email" class="form-control" id="recipientEmail" name="recipientEmail"
-                                required>
+                            <input type="email" class="form-control" id="recipientEmail" name="recipient_email"
+                                readonly required>
+                            <input type="hidden" id="recipientId" name="recipient_id">
+                            <input type="hidden" id="userId" name="user_id">
                         </div>
                         <div class="mb-3">
                             <label for="emailSubject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="emailSubject" name="emailSubject" required>
+                            <input type="text" class="form-control" id="emailSubject" name="subject" required>
                         </div>
                         <div class="mb-3">
                             <label for="emailBody" class="form-label">Message</label>
-                            <textarea class="form-control" id="emailBody" name="emailBody" rows="4" required></textarea>
+                            <textarea name="message" class="form-control" id="editor"></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- Close Button -->
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
-                        <i class="mdi mdi-close"></i> Close
-                    </button>
-
-                    <!-- Send Button -->
-                    <button type="submit" class="btn btn-sm btn-primary" form="sendEmailForm">
-                        <i class="mdi mdi-send"></i> Send
-                    </button>
-
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                            <i class="mdi mdi-close"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="mdi mdi-send"></i> Send
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -186,7 +206,8 @@
                     <div id="modal-note-content"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i class="mdi mdi-close"></i> Close</button>
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i
+                            class="mdi mdi-close"></i> Close</button>
                 </div>
             </div>
         </div>
@@ -207,16 +228,62 @@
                 order: [
                     [1, 'desc']
                 ],
-
                 columnDefs: [{
                         width: '10%',
                         targets: 0
                     },
                     {
                         orderable: false,
-                        targets: [3, 4]
+                        targets: [0, 3, 4]
                     }
                 ]
+            });
+
+            $('#selectAll').on('change', function() {
+                $('.contact-checkbox').prop('checked', this.checked);
+            });
+
+            $('#filterButton').on('click', function() {
+                const selectedStatus = $('#statusFilter').val();
+                const selectedIds = $('.contact-checkbox:checked').map(function() {
+                    return $(this).closest('tr').data('id');
+                }).get();
+
+                console.log('Checked IDs:', selectedIds);
+                if (selectedIds.length === 0) {
+                    alert('Please select at least one contact.');
+                    return;
+                }
+
+                console.log({
+                    ids: selectedIds,
+                    status: selectedStatus,
+                    _token: '{{ csrf_token() }}'
+                });
+                $.ajax({
+                    url: '{{ route('user.sent_emails.update') }}',
+                    method: 'POST',
+                    data: {
+                        ids: selectedIds,
+                        status: selectedStatus,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        var toast = new bootstrap.Toast(document.getElementById(
+                        'successToast'));
+                        toast.show();
+
+                        $('.contact-checkbox').prop('checked', false);
+                        $('#selectAll').prop('checked', false);
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    },
+                    error: function(xhr) {
+                        alert('An error occurred while updating status.');
+                    }
+                });
             });
         });
 
@@ -235,6 +302,27 @@
                         fullNote;
                 });
             });
+
+            const emailModal = document.getElementById('emailModal');
+
+            emailModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const userEmail = button.getAttribute('data-user-email');
+                const recipientId = button.getAttribute('data-recipient-id');
+                const userId = button.getAttribute('data-user-id');
+
+                document.getElementById('recipientEmail').value = userEmail;
+                document.getElementById('recipientId').value = recipientId;
+                document.getElementById('userId').value = userId;
+            });
         });
+
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                removePlugins: ['BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endsection

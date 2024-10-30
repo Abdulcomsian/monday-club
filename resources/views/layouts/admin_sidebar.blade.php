@@ -61,6 +61,15 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('admin/donations') || request()->is('admin/donations/*') ? 'active' : '' }}"
+                        href="{{ route('admin.donations.index') }}">
+                        <i class="mdi mdi-heart-outline"></i> <span>Donations</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="sidebar-background"></div>

@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\SentEmailServices;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class AdminEmailsController extends Controller
 {
-    function index()
+    protected $sentEmailServices;
+
+    public function __construct(SentEmailServices $sentEmailServices)
     {
-        return view('admin.emails.index');
+        $this->sentEmailServices = $sentEmailServices;
     }
 
-    function show()
+    function index()
     {
-        return view('admin.emails.show');
+        $data = $this->sentEmailServices->index();
+        return view('admin.emails.index',compact('data'));
+    }
+
+    function show($id)
+    {
+        $data = $this->sentEmailServices->show($id);
+        return view('admin.emails.show', compact('data'));
     }
 }

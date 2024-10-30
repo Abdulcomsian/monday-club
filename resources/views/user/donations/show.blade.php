@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Emails')
+@section('title', 'Donations')
 @section('header', 'Show')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -16,19 +16,18 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Recipient Email:</div>
-                                <div class="col-md-9">{{ $data->contact->email }}</div>
+                                <div class="col-md-3 font-weight-bold">Contact:</div>
+                                <div class="col-md-9">{{ $data->contact->name }} <br> <small>{{ $data->contact->email }}</div>
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Subject:</div>
-                                <div class="col-md-9">{{ $data->subject }}</div>
+                                <div class="col-md-3 font-weight-bold">Amount:</div>
+                                <div class="col-md-9">{{ number_format($data->amount, 2) }}</div>
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Message:</div>
-                                <div class="col-md-9">{!! $data->message !!}
-                                </div>
+                                <div class="col-md-3 font-weight-bold">Note:</div>
+                                <div class="col-md-9">{!! $data->note !!}</div>
                             </div>
                         </div>
                     </div>

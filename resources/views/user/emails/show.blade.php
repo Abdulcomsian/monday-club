@@ -17,31 +17,17 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Recipient Email:</div>
-                                <div class="col-md-9">tomcruise@gmail.com</div>
+                                <div class="col-md-9">{{ $data->contact->email }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Subject:</div>
-                                <div class="col-md-9">Funding Email</div>
+                                <div class="col-md-9">{{ $data->subject }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Message:</div>
-                                <div class="col-md-9">
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Status:</div>
-                                <div class="col-md-9">
-                                    <span class="badge bg-success">Contacted</span>
-                            <!-- <span class="badge bg-secondary">Not Contacted</span> -->
-                            <!-- <span class="badge bg-info">Positive Reply</span> -->
-                            <!-- <span class="badge bg-danger">Negative Reply</span> -->
-                            <!-- <span class="badge bg-primary">Donated</span> -->
+                                <div class="col-md-9">{!! $data->message !!}
                                 </div>
                             </div>
                         </div>
