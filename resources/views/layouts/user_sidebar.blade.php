@@ -3,7 +3,7 @@
         <a href="#" class="logo logo-light">
             <span class="logo-lg">
                 {{-- <img src="{{ URL::asset('images/logos/logo.png') }}" height="40"> --}}
-                <h3 class="text-white mt-2">Monday Club</h3>
+                <h4 class="text-white mt-2">Monday Club</h4>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -14,6 +14,8 @@
 
     <div id="scrollbar">
         <div class="container-fluid">
+            <div id="two-column-menu">
+            </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/dashboard') || request()->is('user/dashboard/*') ? 'active' : '' }}"

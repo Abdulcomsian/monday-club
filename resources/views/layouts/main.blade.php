@@ -4,14 +4,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Fund Raisig - @yield('title')</title>
+    <title>Monday Club - @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
-    <link rel= "stylesheet"
-        href= "https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     {{-- <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico')}}"> --}}
     @include('layouts.head-css')
     @stack('page-css')
@@ -33,9 +32,11 @@
                 <div class="container-fluid">
                     <div class="container">
                         @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                id="success-alert">
                                 {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         @endif
 
@@ -46,7 +47,8 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         @endif
                     </div>

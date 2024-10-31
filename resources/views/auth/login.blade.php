@@ -24,7 +24,7 @@
                                         height="60">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Fund Raisig App</p>
+                            <p class="mt-3 fs-15 fw-medium">Monday Club App</p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary" style="color:#e30b0b !important;">Welcome Back !</h5>
-                                    <p class="text-muted">Sign in to continue to Fund Raisig App.</p>
+                                    <p class="text-muted">Sign in to continue to Monday Club App.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="{{ route('login') }}" method="POST">
@@ -66,7 +66,6 @@
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                     type="button" id="password-addon"><i
                                                         class="ri-eye-fill align-middle"></i></button>
-
                                             </div>
                                         </div>
 

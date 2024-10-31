@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Services\MediaServices;
 use App\Http\Controllers\Controller;
 

@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.main')
 @section('title', 'Dashboard')
 @section('header', 'Dashboard')
@@ -17,7 +14,7 @@
                 <div class="col-12">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <h4 class="fs-16 mb-1">Good Morning, Admin!</h4>
+                            <h4 class="fs-16 mb-1" id="greeting"></h4>
                             <p class="text-muted mb-0">Here's what's happening with your store
                                 today.</p>
                         </div>
@@ -37,12 +34,11 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">50
-                                    </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $emailsSent }}</h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-success rounded fs-3">
-                                        <i class="mdi mdi-calendar-month"></i>
+                                        <i class="mdi mdi-email-outline"></i>
                                     </span>
                                 </div>
                             </div>
@@ -61,12 +57,11 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">20
-                                    </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $contactsManaged }}</h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-success rounded fs-3">
-                                        <i class="mdi mdi-view-dashboard"></i>
+                                    <span class="avatar-title bg-secondary rounded fs-3">
+                                        <i class="mdi mdi-account-multiple"></i>
                                     </span>
                                 </div>
                             </div>
@@ -85,11 +80,11 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">5</h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $positiveReplies }}</h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-info rounded fs-3">
-                                        <i class="mdi mdi-chart-bar"></i>
+                                        <i class="mdi mdi-thumb-up"></i>
                                     </span>
                                 </div>
                             </div>
@@ -108,8 +103,7 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$2,500
-                                    </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">${{ number_format($dollarsRaised, 2) }}</h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-danger rounded fs-3">

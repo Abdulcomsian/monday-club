@@ -2,11 +2,17 @@
     font-weight: bold;
 }
 
-thead, tbody, tfoot, tr, td, th {
-    border-style: none; /* Remove the solid border */
-  }
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-style: none;
+    /* Remove the solid border */
+}
 
-  .modal-body {
+.modal-body {
     max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -38,7 +44,8 @@ body {
 }
 
 #filterButton {
-    margin-top: 5px;;
+    margin-top: 5px;
+    ;
 }
 
 .toast.bg-success {
@@ -47,19 +54,19 @@ body {
 
 .select2-container .select2-selection--single {
     height: 37px !important;
-  }
+}
 
-  .select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 35px !important;
-  }
+}
 
-  .select2-container--default .select2-selection--single .select2-selection__arrow b {
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
     margin-top: 3px !important;
-  }
+}
 
-  .select2-container--default .select2-selection--single {
+.select2-container--default .select2-selection--single {
     border: var(--vz-border-width) solid var(--vz-input-border-custom) !important;
-  }
+}
 
 .select2-container--default .select2-results__option {
     color: #000000;
@@ -70,4 +77,36 @@ body {
     color: #ffffff;
 }
 
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
 
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
