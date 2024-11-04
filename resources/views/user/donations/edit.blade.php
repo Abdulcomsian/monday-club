@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="contactSelect" class="form-label required">Contact</label>
+                                    <label for="contactSelect" class="form-label required">Contact <span class="text-danger">*</span></label>
                                     @error('contact_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -32,7 +32,7 @@
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="amount" class="form-label required">Amount</label>
+                                    <label for="amount" class="form-label required">Amount <span class="text-danger">*</span></label>
                                     @error('amount')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

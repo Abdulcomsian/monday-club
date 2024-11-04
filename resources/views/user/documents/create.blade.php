@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label required">Title</label>
+                                    <label for="" class="form-label required">Title <span class="text-danger">*</span></label>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Document</label>
+                                    <label for="" class="form-label">Upload Document <span class="text-danger">*</span></label>
                                     @error('document')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

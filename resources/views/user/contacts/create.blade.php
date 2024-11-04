@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-4 d-flex flex-column">
-                                    <label for="name" class="form-label required">Name</label>
+                                    <label for="name" class="form-label required">Name <span class="text-danger">*</span></label>
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -24,7 +24,7 @@
                                 </div>
 
                                 <div class="col-xl-4 d-flex flex-column">
-                                    <label for="email" class="form-label required">Email</label>
+                                    <label for="email" class="form-label required">Email <span class="text-danger">*</span></label>
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -32,14 +32,16 @@
                                 </div>
 
                                 <div class="col-xl-4 d-flex flex-column">
-                                    <label for="contact" class="form-label required">Contact#</label>
+                                    <label for="contact" class="form-label required">Contact# <span class="text-danger">*</span></label>
                                     @error('contact')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="number" class="form-control" name="contact" placeholder="contact here...">
+                                    <input type="text" class="form-control" name="contact" placeholder="contact here..."
+                                           pattern="^\d{8,12}$" title="Contact number must be between 8 and 12 digits" required
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="12">
                                 </div>
 
-                                <div class="col-xl-12">
+                                <div class="col-xl-12 mt-1">
                                     <label for="" class="form-label">Note</label>
                                     @error('note')
                                         <span class="text-danger">{{ $message }}</span>

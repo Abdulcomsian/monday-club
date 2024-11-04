@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.model_main')
 @section('title', 'Contacts')
 @section('header', 'List')
 @section('content')
@@ -154,8 +154,8 @@
         </div>
     </div>
 
-    {{-- Send Email Model --}}
-    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal fade no-scroll-modal" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -193,6 +193,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- Note Model --}}
     <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
@@ -270,7 +271,7 @@
                     },
                     success: function(response) {
                         var toast = new bootstrap.Toast(document.getElementById(
-                        'successToast'));
+                            'successToast'));
                         toast.show();
 
                         $('.contact-checkbox').prop('checked', false);

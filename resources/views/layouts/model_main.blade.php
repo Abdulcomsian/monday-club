@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
     {{-- <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico')}}"> --}}
-    @include('layouts.head-css')
+    @include('layouts.head-modal-css')
     @stack('page-css')
 </head>
 

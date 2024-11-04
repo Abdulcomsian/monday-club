@@ -4,13 +4,6 @@
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="container">
-            <div class="d-flex mb-3">
-                <a href="{{ route('user.contacts.create') }}">
-                    <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>
-                        Add New
-                    </button>
-                </a>
-            </div>
             <table id="mytable"
                 class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
                 data-ordering="false">
