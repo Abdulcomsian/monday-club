@@ -110,3 +110,18 @@ body {
     background-color: #f8f9fa;
     border-top: 1px solid #e9ecef;
 }
+
+/* Ensure that all cards in a row are the same height */
+.equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.card {
+    height: 100%;
+}

@@ -23,7 +23,8 @@ return new class extends Migration
                 'not_contracted',
                 'positive_reply',
                 'negative_reply',
-                'donated'
+                'donated',
+                'mediate_reply'
             ])->default('not_contracted');
             $table->timestamps();
 

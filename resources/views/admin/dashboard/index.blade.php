@@ -23,41 +23,13 @@
             </div>
 
             <div class="row">
+                <!-- Total Contacts Managed -->
                 <div class="col-xl-3 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
+                    <div class="card card-animate equal-height">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-4">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Emails Sent</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $emailsSent }}</h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-success rounded fs-3">
-                                        <i class="mdi mdi-email-outline"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Contacts Managed</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $contactsManaged }}</h4>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Contacts Managed</p>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-secondary rounded fs-3">
@@ -65,56 +37,85 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="d-flex align-items-end justify-content-between">
+                                <h4 class="fs-22 fw-semibold ff-secondary mb-0">{{ $contactsManaged }}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Emails Sent: Current Week, Current Month, Past 6 Months, Past Year -->
                 <div class="col-xl-3 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
+                    <div class="card card-animate equal-height">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-4">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Positive Replies</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $positiveReplies }}</h4>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Emails Sent</p>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-info rounded fs-3">
-                                        <i class="mdi mdi-thumb-up"></i>
+                                    <span class="avatar-title bg-primary rounded fs-3">
+                                        <i class="mdi mdi-email-outline"></i>
                                     </span>
                                 </div>
                             </div>
+                            <div class="mt-4">
+                                <p>Current Week: <strong>{{ $emailsSentCurrentWeek }}</strong></p>
+                                <p>Current Month: <strong>{{ $emailsSentCurrentMonth }}</strong></p>
+                                <p>Past 6 Months: <strong>{{ $emailsSentPastSixMonths }}</strong></p>
+                                <p>Past Year: <strong>{{ $emailsSentPastYear }}</strong></p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Positive, Mediate, Negative Replies -->
                 <div class="col-xl-3 col-md-6">
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
+                    <div class="card card-animate equal-height">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-4">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Dollars Raised</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Replies</p>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-success rounded fs-3">
+                                        <i class="mdi mdi-comment-check-outline"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">${{ number_format($dollarsRaised, 2) }}</h4>
+                            <div class="mt-4">
+                                <p>Positive Replies: <strong>{{ $positiveReplies }}</strong></p>
+                                <p>Mediate Replies: <strong>{{ $mediateReplies }}</strong></p>
+                                <p>Negative Replies: <strong>{{ $negativeReplies }}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dollars Raised: Current Week, Current Month, Past 6 Months, Past Year -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-animate equal-height">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Dollars Raised</p>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-danger rounded fs-3">
-                                        <i class="mdi mdi-wallet"></i>
+                                        <i class="mdi mdi-wallet-travel"></i>
                                     </span>
                                 </div>
+                            </div>
+                            <div class="mt-4">
+                                <p>Current Week: <strong>${{ number_format($dollarsRaisedCurrentWeek, 2) }}</strong></p>
+                                <p>Current Month: <strong>${{ number_format($dollarsRaisedCurrentMonth, 2) }}</strong></p>
+                                <p>Past 6 Months: <strong>${{ number_format($dollarsRaisedPastSixMonths, 2) }}</strong></p>
+                                <p>Past Year: <strong>${{ number_format($dollarsRaisedPastYear, 2) }}</strong></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
