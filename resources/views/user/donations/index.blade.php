@@ -28,7 +28,7 @@
                         @foreach ($data as $key => $value)
                             <tr class="no-records">
                                 <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->contact->name }} <br> <small>{{ $value->contact->email }}
+                                <td class="text-center">{{ $value->contact->name ?? 'N/A' }} <br> <small>{{ $value->contact->email ?? '' }}
                                 </td>
                                 <td class="text-center">{{ number_format($value->amount, 2) }}</td>
                                 <td class="text-center">

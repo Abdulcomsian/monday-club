@@ -20,7 +20,7 @@
                         @foreach ($data as $key => $value)
                             <tr class="no-records">
                                 <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->contact->email }}</td>
+                                <td class="text-center">{{ $value->contact->email ?? 'N/A' }}</td>
                                 <td class="text-center">{{ $value->subject }}</td>
                                 <td class="text-center">
                                     @php

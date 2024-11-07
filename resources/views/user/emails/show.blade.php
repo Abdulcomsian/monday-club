@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Recipient Email:</div>
-                                <div class="col-md-9">{{ $data->contact->email }}</div>
+                                <div class="col-md-9">{{ $data->contact->email ?? 'N/A' }}</div>
                             </div>
 
                             <div class="row mb-3">
