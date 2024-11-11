@@ -47,10 +47,10 @@
                             <div class="row mt-4 text-right">
                                 <div class="col-xl-12">
                                     <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="far fa-save icon"></i> Save
+                                        <i class="fas fa-save icon"></i> Save
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-light">
-                                        <i class="fa fa-ban icon"></i> Cancel
+                                    <button type="reset" class="btn btn-sm btn-light">
+                                        <i class="fas fa-ban icon"></i> Cancel
                                     </button>
                                 </div>
                             </div>

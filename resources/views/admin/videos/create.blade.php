@@ -46,7 +46,7 @@
                                     <button type="submit" class="btn btn-sm btn-primary">
                                         <i class="fas fa-save icon"></i> Save
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-light">
+                                    <button type="reset" class="btn btn-sm btn-light">
                                         <i class="fas fa-ban icon"></i> Cancel
                                     </button>
                                 </div>
