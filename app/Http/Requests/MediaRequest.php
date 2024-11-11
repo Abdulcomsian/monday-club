@@ -25,8 +25,7 @@ class MediaRequest extends FormRequest
 
         return [
             'title' => 'required|string|max:255',
-            // 'video_file' => 'required|file|mimes:mp4,avi,mov,mkv|max:20480',
-            'video_file' => $isUpdate ? 'nullable' : 'required',
+            'video_file' => $isUpdate ? 'nullable|file|mimes:mp4,avi,mov,mkv|max:20480' : 'required|file|mimes:mp4,avi,mov,mkv|max:20480',
             'description' => 'nullable|string'
         ];
     }

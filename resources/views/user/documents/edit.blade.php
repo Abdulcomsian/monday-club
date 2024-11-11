@@ -32,7 +32,7 @@
                                     @enderror
                                     <input class="form-control" type="file" name="document" accept=".pdf"
                                         value="{{ $data->file }}">
-                                    <small class="text-danger">Note: Only PDF files are allowed.</small>
+                                    <small class="text-danger">Note: Only PDF,DOC,DOCS files are allowed.</small>
                                     @if (isset($data->file) && !old('document'))
                                         <small class="text-muted">If you don't want to update the document, leave this
                                             blank.</small>
@@ -41,17 +41,31 @@
 
                                 <div class="col-xl-4 d-flex flex-column">
                                     @if ($data->file)
-                                        <a href="{{ asset($data->file) }}" target="_blank" rel="noopener noreferrer"
-                                            class="btn btn-sm btn-info">
-                                            Click to View Document
-                                        </a>
-                                        <iframe src="{{ asset($data->file) }}" width="100%" height="100px"
-                                            frameborder="0">
+                                    @php
+                                        $fileExtension = pathinfo($data->file, PATHINFO_EXTENSION);
+                                        $fileUrl = asset($data->file);  // Get the full URL of the file
+                                    @endphp
+
+                                    @if (in_array($fileExtension, ['pdf']))
+                                        <iframe src="{{ $fileUrl }}" width="100%" height="500px" frameborder="0">
                                             Your browser does not support iframes.
                                         </iframe>
+
+                                    @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                        <div>
+                                            <a href="{{ asset($data->file) }}">
+                                                <button type="button" class="btn btn-secondary mt-4">
+                                                    <i class="fas fa-download"></i>
+                                                     Download File</button>
+                                            </a>
+                                        </div>
                                     @else
-                                        <p>No document available.</p>
+                                        <p>Unsupported document format.</p>
                                     @endif
+
+                                    @else
+                                    <p>No document available.</p>
+                                @endif
                                 </div>
 
                                 <div class="col-xl-12">

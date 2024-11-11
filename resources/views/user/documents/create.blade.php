@@ -29,8 +29,8 @@
                                     @error('document')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input class="form-control" type="file" name="document" accept=".pdf" value="">
-                                    <small class="text-danger">Note: Only PDF files are allowed.</small>
+                                    <input class="form-control" type="file" name="document" accept=".pdf,.doc,.docx" value="">
+                                    <small class="text-danger">Note: Only PDF,DOC,DOCS files are allowed.</small>
                                 </div>
 
                                 <div class="col-xl-12">

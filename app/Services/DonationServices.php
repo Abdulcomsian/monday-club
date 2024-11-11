@@ -22,7 +22,7 @@ class DonationServices
         if ($user->is_admin == 1) {
             return $this->model::latest()->get();
         } else {
-            return $this->model::where('user_id', Auth::id())->get();
+            return $this->model::where('user_id', Auth::id())->latest()->get();
         }
     }
 

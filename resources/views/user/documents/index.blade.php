@@ -18,7 +18,7 @@
                     <tr style="text-wrap: nowrap;">
                         <th class="text-center">#</th>
                         <th class="text-center">Title</th>
-                        <th class="text-center">Video</th>
+                        <th class="text-center">File</th>
                         <th class="text-center">Description</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -29,7 +29,7 @@
                             <tr>
                                 <td class="text-center">{{ $key + 1 }}</td>
                                 <td class="text-center">{{ $value->title }}</td>
-                                <td class="text-center"><a href="{{ asset($value->file) }}" download>Download Document</a></td>
+                                <td class="text-center"><a href="{{ asset($value->file) }}" download>Download File</a></td>
                                 <td class="text-center">
                                     @php
                                         $fullDescription = $value->description;
@@ -122,7 +122,7 @@
                 responsive: true,
                 scrollX: true,
                 scrollCollapse: true,
-                pageLength: 100,
+                pageLength: 10,
                 orderCellsTop: true,
                 order: [
                     [1, 'desc']

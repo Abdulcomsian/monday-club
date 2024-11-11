@@ -80,7 +80,7 @@
                 responsive: true,
                 scrollX: true,
                 scrollCollapse: true,
-                pageLength: 100,
+                pageLength: 10,
                 orderCellsTop: true,
                 order: [
                     [1, 'desc']

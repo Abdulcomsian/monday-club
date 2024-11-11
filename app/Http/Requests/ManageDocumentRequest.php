@@ -25,7 +25,7 @@ class ManageDocumentRequest extends FormRequest
 
         return [
             'title' => 'required|string|max:255',
-            'document' => $isUpdate ? 'nullable' : 'required',
+            'document' => $isUpdate ? 'nullable|file|mimes:pdf,doc,docx|max:2048' : 'required|file|mimes:pdf,doc,docx|max:2048',
             'description' => 'nullable|string'
         ];
     }
