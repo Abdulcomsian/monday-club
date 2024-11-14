@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Document:</div>
+                                <div class="col-md-3 font-weight-bold">FIle:</div>
                                 <div class="col-md-9">
                                     @if ($data->file)
                                         @php

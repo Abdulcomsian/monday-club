@@ -12,7 +12,7 @@
                         <th class="text-center">#</th>
                         <th class="text-center">Created By</th>
                         <th class="text-center">Title</th>
-                        <th class="text-center">Video</th>
+                        <th class="text-center">FIle</th>
                         <th class="text-center">Description</th>
                         <th class="text-center">Actions</th>
                     </tr>

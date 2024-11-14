@@ -24,7 +24,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-sm btn-info" id="filterButton">Filter</button>
+                    <button type="button" class="btn btn-sm btn-info" id="filterButton">Update</button>
                 </div>
             </div>
             <table id="mytable"
@@ -262,7 +262,7 @@
                     _token: '{{ csrf_token() }}'
                 });
                 $.ajax({
-                    url: '{{ route('user.sent_emails.update') }}',
+                    url: '{{ route("user.sent_emails.update") }}',
                     method: 'POST',
                     data: {
                         ids: selectedIds,

@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="col-xl-4 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Document <span class="text-danger">*</span></label>
+                                    <label for="" class="form-label">Upload File <span class="text-danger">*</span></label>
                                     @error('document')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
