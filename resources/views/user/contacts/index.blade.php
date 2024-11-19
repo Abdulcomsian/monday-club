@@ -24,7 +24,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-sm btn-info" id="filterButton">Update</button>
+                    <button type="button" class="btn btn-sm btn-info" id="filterButton"><i class="fas fa-refresh icon"></i> Update</button>
                 </div>
             </div>
             <table id="mytable"
@@ -168,6 +168,7 @@
                         <div class="mb-3">
                             <label for="recipientEmail" class="form-label">Recipient Email</label>
                             <input type="email" class="form-control" id="recipientEmail" name="recipient_email"
+                            style="background-color: #f0f0f0;"
                                 readonly required>
                             <input type="hidden" id="recipientId" name="recipient_id">
                             <input type="hidden" id="userId" name="user_id">
@@ -250,17 +251,11 @@
                     return $(this).closest('tr').data('id');
                 }).get();
 
-                console.log('Checked IDs:', selectedIds);
                 if (selectedIds.length === 0) {
-                    alert('Please select at least one contact.');
+                    alert('Please select at least one contact to update.');
                     return;
                 }
 
-                console.log({
-                    ids: selectedIds,
-                    status: selectedStatus,
-                    _token: '{{ csrf_token() }}'
-                });
                 $.ajax({
                     url: '{{ route("user.sent_emails.update") }}',
                     method: 'POST',

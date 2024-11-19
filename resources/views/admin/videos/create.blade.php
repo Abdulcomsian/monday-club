@@ -28,7 +28,7 @@
                                     @error('companyImage')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input class="form-control" type="file" name="video_file">
+                                    <input class="form-control" type="file" name="video_file" accept=".mp4, .avi, .mov, .mkv">
                                     <small class="text-danger">Note: Only mp4, avi, mov, and mkv formats are
                                         allowed.</small>
                                 </div>

@@ -32,6 +32,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="container" style="display: flex; flex-direction: column; align-items: center; padding-top: 20px;">
+                    <!-- Heading -->
+                    <div class="d-flex justify-content-center w-100">
+                        <h2 class="donation-heading text-center" style="margin-top: 0;">Donations Chart</h2>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="chart-container" style="position: relative; height: 400px; width: 400px; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="donationChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -39,6 +50,43 @@
 @endsection
 
 @section('script')
-    @parent
-{{-- script here --}}
+@parent
+<script>
+    var ctx = document.getElementById('donationChart').getContext('2d');
+
+    var percentage = @json($percentage);
+    var remainingPercentage = 100 - percentage;
+
+    var donationByUserLabel = 'Donation by ' + @json($data->contact->name);
+    var otherLabel = 'Others';
+
+    var data = {
+        labels: [donationByUserLabel, otherLabel],
+        datasets: [{
+            data: [percentage, remainingPercentage],
+            backgroundColor: ['#32CD32', '#E5E5E5'],
+            borderWidth: 1,
+        }]
+    };
+
+    var options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.raw.toFixed(2) + '%';
+                    }
+                }
+            }
+        }
+    };
+
+    var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: options
+    });
+</script>
 @endsection

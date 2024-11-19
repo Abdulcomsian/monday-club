@@ -46,9 +46,21 @@ class DonationServices
         return $save;
     }
 
-    function show($id)
+    public function show($id)
     {
-        return $this->model::findOrFail($id);
+        $data = $this->model::findOrFail($id);
+        $contactID = $data->contact_id;
+
+        $totalAmount  = $this->model->sum('amount');
+        $userAmount = $data->where('contact_id',$contactID)->sum('amount');
+        $percentage = $totalAmount > 0 ? ($userAmount / $totalAmount) * 100 : 0;
+
+        return [
+            'data' => $data,
+            'totalAmount' => $totalAmount,
+            'userAmount' => $userAmount,
+            'percentage' => $percentage
+        ];
     }
 
     function edit($id)

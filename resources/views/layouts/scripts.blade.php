@@ -12,6 +12,8 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="{{ URL::asset('build/js/layout.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -36,20 +38,24 @@
         const greetingElement = document.getElementById('greeting');
         const currentHour = new Date().getHours();
 
-        @if (auth()->check())
-            const isAdmin = @json(auth()->user()->is_admin);
+        @if(auth()->check())
+        const userName = @json(auth()->user()->name);
         @else
-            const isAdmin = false;
+        const userName = null;
         @endif
 
-        let greetingMessage;
+        let greetingMessage = '';
 
-        if (currentHour < 12) {
-            greetingMessage = isAdmin ? 'Good Morning, Admin!' : 'Good Morning, User!';
-        } else if (currentHour < 18) {
-            greetingMessage = isAdmin ? 'Good Afternoon, Admin!' : 'Good Afternoon, User!';
+        if (userName) {
+            if (currentHour < 12) {
+                greetingMessage = 'Good Morning, ' + userName + '!';
+            } else if (currentHour < 18) {
+                greetingMessage = 'Good Afternoon, ' + userName + '!';
+            } else {
+                greetingMessage = 'Good Afternoon, ' + userName + '!';
+            }
         } else {
-            greetingMessage = isAdmin ? 'Good Evening, Admin!' : 'Good Evening, User!';
+            greetingMessage = 'Hello, Guest!';
         }
 
         greetingElement.textContent = greetingMessage;

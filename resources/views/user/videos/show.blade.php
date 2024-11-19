@@ -52,10 +52,10 @@
                                                 </p>
                                             </div>
                                         @else
-                                            <p>Unsupported document format.</p>
+                                            <p>Unsupported video format.</p>
                                         @endif
                                     @else
-                                        <p>No document available.</p>
+                                        <p>No video available.</p>
                                     @endif
                                 </div>
                             </div>

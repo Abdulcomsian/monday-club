@@ -20,7 +20,13 @@ class AdminDonationsController extends Controller
 
     function show($id)
     {
-        $data = $this->donationService->show($id);
-        return view('admin.donations.show', compact('data'));
+        $result = $this->donationService->show($id);
+
+        return view('admin.donations.show', [
+            'data' => $result['data'],
+            'totalAmount' => $result['totalAmount'],
+            'userAmount' => $result['userAmount'],
+            'percentage' => $result['percentage']
+        ]);
     }
 }

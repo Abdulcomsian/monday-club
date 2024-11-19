@@ -43,8 +43,14 @@ class DonationsController extends Controller
 
     function show($id)
     {
-        $data = $this->donationService->show($id);
-        return view('user.donations.show', compact('data'));
+        $result = $this->donationService->show($id);
+
+        return view('user.donations.show', [
+            'data' => $result['data'],
+            'totalAmount' => $result['totalAmount'],
+            'userAmount' => $result['userAmount'],
+            'percentage' => $result['percentage']
+        ]);
     }
 
     function edit($id)

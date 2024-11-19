@@ -24,7 +24,7 @@ class DonationsRequest extends FormRequest
         return [
             'contact_id' => 'required|exists:contacts,id',
             'amount' => 'required|numeric|min:0',
-            'note' => 'nullable|string|max:255',
+            'note' => 'nullable|string',
         ];
     }
 }
