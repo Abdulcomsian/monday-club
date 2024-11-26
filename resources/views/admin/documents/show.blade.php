@@ -16,20 +16,46 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Title:</div>
-                                <div class="col-md-9">ANCHOR POINT</div>
+                                <div class="col-md-9">{{ $data->title }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Description:</div>
-                                <div class="col-md-9">ANCHOR POINT / SAFETY LINE (PERMANENT)</div>
+                                <div class="col-md-9">{!! $data->description !!}</div>
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Document:</div>
+                                <div class="col-md-3 font-weight-bold">FIle:</div>
                                 <div class="col-md-9">
-                                    <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                                        width="100%" height="500px" frameborder="0">
-                                    </iframe>
+                                    @if ($data->file)
+                                        @php
+                                            $fileExtension = pathinfo($data->file, PATHINFO_EXTENSION);
+                                            $fileUrl = asset($data->file);
+                                        @endphp
+
+                                        @if (in_array($fileExtension, ['pdf']))
+                                            <iframe src="{{ $fileUrl }}" width="100%" height="500px" frameborder="0">
+                                                Your browser does not support iframes.
+                                            </iframe>
+                                        @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                            <div>
+                                                <a href="{{ asset($data->file) }}">
+                                                    <button type="button" class="btn btn-secondary">
+                                                        <i class="fas fa-download"></i>
+                                                        Download File</button>
+                                                </a>
+
+                                                <p class="text-danger" style="font-size: 0.85rem; margin-top: 5px;">
+                                                    This file type is not supported by most browsers for previewing. Please
+                                                    download it to view.
+                                                </p>
+                                            </div>
+                                        @else
+                                            <p>Unsupported document format.</p>
+                                        @endif
+                                    @else
+                                        <p>No document available.</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

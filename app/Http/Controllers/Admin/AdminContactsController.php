@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ContactServices;
+use App\Http\Controllers\Controller;
 
 class AdminContactsController extends Controller
 {
+    protected $contactServices;
+    public function __construct(ContactServices  $contactServices)
+    {
+        $this->contactServices = $contactServices;
+    }
     function index()
     {
-        return view('admin.contacts.index');
+        $data = $this->contactServices->index();
+        return view('admin.contacts.index', compact('data'));
     }
 
-    function show()
+    function show($id)
     {
-        return view('admin.contacts.show');
+        $data = $this->contactServices->show($id);
+        return view('admin.contacts.show', compact('data'));
     }
 }

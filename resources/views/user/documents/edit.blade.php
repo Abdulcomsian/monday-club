@@ -11,26 +11,61 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.documents.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label required">Title</label>
+                                <div class="col-xl-4 d-flex flex-column">
+                                    <label for="" class="form-label required">Title <span class="text-danger">*</span></label>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" name="title" placeholder="title here...">
+                                    <input type="text" class="form-control" name="title" value="{{ $data->title }}"
+                                        placeholder="title here...">
                                 </div>
 
-                                <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Document</label>
+                                <div class="col-xl-4 d-flex flex-column">
+                                    <label for="" class="form-label">Upload File <span class="text-danger">*</span></label>
                                     @error('document')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <input class="form-control" type="file" name="document" accept=".pdf"
-                                        value="">
-                                    <small class="text-danger">Note: Only PDF files are allowed.</small>
+                                        value="{{ $data->file }}">
+                                    <small class="text-danger">Note: Only PDF,DOC,DOCS files are allowed.</small>
+                                    @if (isset($data->file) && !old('document'))
+                                        <small class="text-muted">If you don't want to update the document, leave this
+                                            blank.</small>
+                                    @endif
+                                </div>
+
+                                <div class="col-xl-4 d-flex flex-column">
+                                    @if ($data->file)
+                                    @php
+                                        $fileExtension = pathinfo($data->file, PATHINFO_EXTENSION);
+                                        $fileUrl = asset($data->file);  // Get the full URL of the file
+                                    @endphp
+
+                                    @if (in_array($fileExtension, ['pdf']))
+                                        <iframe src="{{ $fileUrl }}" width="100%" height="500px" frameborder="0">
+                                            Your browser does not support iframes.
+                                        </iframe>
+
+                                    @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                        <div>
+                                            <a href="{{ asset($data->file) }}">
+                                                <button type="button" class="btn btn-secondary mt-4">
+                                                    <i class="fas fa-download"></i>
+                                                     Download File</button>
+                                            </a>
+                                        </div>
+                                    @else
+                                        <p>Unsupported document format.</p>
+                                    @endif
+
+                                    @else
+                                    <p>No document available.</p>
+                                @endif
                                 </div>
 
                                 <div class="col-xl-12">
@@ -38,16 +73,16 @@
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <textarea name="description" class="form-control" id="editor"></textarea>
+                                    <textarea name="description" class="form-control" id="editor">{!! $data->description !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4 text-right">
                                 <div class="col-xl-12">
-                                    <button type="button" class="btn btn-sm btn-primary">
-                                        <i class="far fa-save icon"></i> Save
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-save icon"></i> Save
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-light">
-                                        <i class="fa fa-ban icon"></i> Cancel
+                                    <button type="reset" class="btn btn-sm btn-light">
+                                        <i class="fas fa-ban icon"></i> Cancel
                                     </button>
                                 </div>
                             </div>
@@ -64,9 +99,7 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle',
-                    'ImageToolbar', 'ImageUpload', 'MediaEmbed'
-                ],
+                removePlugins: [ 'BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
             })
             .catch(error => {
                 console.error(error);

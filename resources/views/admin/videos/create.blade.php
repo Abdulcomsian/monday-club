@@ -11,12 +11,12 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.videos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label required">Title</label>
+                                    <label for="" class="form-label required">Title <span class="text-danger">*</span></label>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -24,11 +24,11 @@
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Video</label>
+                                    <label for="" class="form-label">Upload Video <span class="text-danger">*</span></label>
                                     @error('companyImage')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input class="form-control" type="file" name="companyImage" value="">
+                                    <input class="form-control" type="file" name="video_file" accept=".mp4, .avi, .mov, .mkv">
                                     <small class="text-danger">Note: Only mp4, avi, mov, and mkv formats are
                                         allowed.</small>
                                 </div>
@@ -43,11 +43,11 @@
                             </div>
                             <div class="row mt-4 text-right">
                                 <div class="col-xl-12">
-                                    <button type="button" class="btn btn-sm btn-primary">
-                                        <i class="far fa-save icon"></i> Save
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-save icon"></i> Save
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-light">
-                                        <i class="fa fa-ban icon"></i> Cancel
+                                    <button type="reset" class="btn btn-sm btn-light">
+                                        <i class="fas fa-ban icon"></i> Cancel
                                     </button>
                                 </div>
                             </div>
@@ -64,9 +64,7 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle',
-                    'ImageToolbar', 'ImageUpload', 'MediaEmbed'
-                ],
+                removePlugins: [ 'BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
             })
             .catch(error => {
                 console.error(error);

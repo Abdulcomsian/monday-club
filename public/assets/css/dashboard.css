@@ -1,3 +1,127 @@
 .font-weight-bold {
     font-weight: bold;
 }
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-style: none;
+    /* Remove the solid border */
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--vz-header-bg) !important;
+}
+
+#page-topbar {
+    background-color: var(--vz-body-bg) !important;
+}
+
+.bordered-dropdown {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.topbar-user .btn {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.topbar-user .btn:hover {
+    background-color: #f8f9fa;
+}
+
+#filterButton {
+    margin-top: 5px;
+    ;
+}
+
+.toast.bg-success {
+    background-color: #28a745;
+}
+
+.select2-container .select2-selection--single {
+    height: 37px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 35px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    margin-top: 3px !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: var(--vz-border-width) solid var(--vz-input-border-custom) !important;
+}
+
+.select2-container--default .select2-results__option {
+    color: #000000;
+}
+
+.select2-container--default .select2-results__option--highlighted {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Ensure that all cards in a row are the same height */
+.equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.card {
+    height: 100%;
+}

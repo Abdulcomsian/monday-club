@@ -2,7 +2,8 @@
     <div class="navbar-brand-box">
         <a href="#" class="logo logo-light">
             <span class="logo-lg">
-                <img src="{{ URL::asset('images/logos/logo.png') }}" height="40">
+                {{-- <img src="{{ URL::asset('images/logos/logo.png') }}" height="40"> --}}
+                <h4 class="text-white mt-2">Monday Club</h4>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -13,6 +14,8 @@
 
     <div id="scrollbar">
         <div class="container-fluid">
+            <div id="two-column-menu">
+            </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/dashboard') || request()->is('user/dashboard/*') ? 'active' : '' }}"
@@ -52,8 +55,17 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/emails') || request()->is('user/emails/*') ? 'active' : '' }}"
-                        href="{{ route('user.emails.index') }}">
+                        href="{{ route('user.sent_emails.index') }}">
                         <i class="mdi mdi-email-outline"></i> <span>Sent Emails</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('user/donations') || request()->is('user/donations/*') ? 'active' : '' }}"
+                        href="{{ route('user.donations.index') }}">
+                        <i class="mdi mdi-heart-outline"></i> <span>Donations</span>
                     </a>
                 </li>
             </ul>
@@ -62,3 +74,4 @@
     <div class="sidebar-background"></div>
 </div>
 <div class="vertical-overlay"></div>
+

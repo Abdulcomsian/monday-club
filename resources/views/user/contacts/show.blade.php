@@ -17,37 +17,47 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Name:</div>
-                                <div class="col-md-9">Tom Cruise</div>
+                                <div class="col-md-9">{{ $data->name }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Email:</div>
-                                <div class="col-md-9">tomcruise@gmail.com</div>
+                                <div class="col-md-9">{{ $data->email }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Contact#:</div>
-                                <div class="col-md-9">143567432</div>
+                                <div class="col-md-9">{{ $data->contact_no }}</div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Status:</div>
                                 <div class="col-md-9">
-                                    <span class="badge bg-success">Contacted</span>
-                            <!-- <span class="badge bg-secondary">Not Contacted</span> -->
-                            <!-- <span class="badge bg-info">Positive Reply</span> -->
-                            <!-- <span class="badge bg-danger">Negative Reply</span> -->
-                            <!-- <span class="badge bg-primary">Donated</span> -->
+                                    @switch($data->status)
+                                        @case('contracted')
+                                            <span class="badge bg-success">Contacted</span>
+                                            @break
+                                        @case('not_contracted')
+                                            <span class="badge bg-secondary">Not Contacted</span>
+                                            @break
+                                        @case('positive_reply')
+                                            <span class="badge bg-info">Positive Reply</span>
+                                            @break
+                                        @case('negative_reply')
+                                            <span class="badge bg-danger">Negative Reply</span>
+                                            @break
+                                        @case('donated')
+                                            <span class="badge bg-primary">Donated</span>
+                                            @break
+                                        @default
+                                            <span class="badge bg-light">Unknown Status</span>
+                                    @endswitch
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Note:</div>
-                                <div class="col-md-9">
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    </p>
-                                </div>
+                                <div class="col-md-9">{!! $data->note !!}</div>
                             </div>
                         </div>
                     </div>

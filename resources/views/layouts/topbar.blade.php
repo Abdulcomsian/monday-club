@@ -19,6 +19,8 @@
                     </span>
                 </button>
 
+                <h3 class="mt-4">@yield('header')</h3>
+
                 <!-- App Search-->
                 {{-- <form class="app-search d-none d-md-block">
                     <div class="position-relative">
@@ -311,23 +313,22 @@
                 </div> --}}
 
                 <div class="dropdown ms-sm-3 header-item topbar-user">
-                    <button type="button" class="btn shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn shadow-none border rounded px-3 py-2 d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-color: #ddd;">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="{{URL::asset('images/avatar-1.jpg')}}" alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ Auth::user()->name }}</span>
                                 <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ Auth::user()->is_admin == '1' ? 'Admin' : 'User' }}</span>
                             </span>
+                            <i class="ms-2 mdi mdi-chevron-down fs-16 align-middle"></i>
                         </span>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end">
+                    <div class="dropdown-menu dropdown-menu-end bordered-dropdown">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome {{ Auth::user()->name }}!</h6>
-                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-                        {{-- <div class="dropdown-divider"></div> --}}
-                        <form action="{{route('logout')}}" method="POST">
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                        <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="dropdown-item "><i class="bx bx-power-off font-size-16 align-middle me-1"></i> <span key="t-logout">Logout</span></button>
+                            <button type="submit" class="dropdown-item"><i class="bx bx-power-off font-size-16 align-middle me-1"></i> <span key="t-logout">Logout</span></button>
                         </form>
                     </div>
                 </div>
@@ -335,28 +336,3 @@
         </div>
     </div>
 </header>
-
-{{-- <!-- removeNotificationModal -->
-<div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mt-2 text-center">
-                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
-                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                        <h4>Are you sure ?</h4>
-                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
-                </div>
-            </div>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal --> --}}
