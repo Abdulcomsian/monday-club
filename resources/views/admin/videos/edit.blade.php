@@ -112,7 +112,9 @@
 
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                removePlugins: [ 'BlockQuote', 'Table', 'MediaEmbed', 'Indent', 'Heading', 'ImageUpload'],
+                removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle',
+                    'ImageToolbar', 'ImageUpload', 'MediaEmbed',,'Table','TableToolbar'
+                ],
             })
             .catch(error => {
                 console.error(error);
