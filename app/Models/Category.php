@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Category extends Model
 {
-    protected $table = 'medias';
+    protected $table = 'categories';
 
     protected $fillable = [
         'title',
-        'file',
         'description'
     ];
 
-    public function category()
+    public function media()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasOne(Media::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MediaRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,8 @@ class MediaRequest extends FormRequest
      */
     public function rules(): array
     {
-        $isUpdate = $this->isMethod('put');
-
         return [
-            'category_id' => $isUpdate ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
             'title' => 'required|string|max:255',
-            'video_file' => $isUpdate ? 'nullable|file|mimes:mp4,avi,mov,mkv|max:20480' : 'required|file|mimes:mp4,avi,mov,mkv|max:20480',
             'description' => 'nullable|string'
         ];
     }

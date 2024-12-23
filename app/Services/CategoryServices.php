@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Media;
 use App\Models\Category;
 
-class MediaServices
+class CategoryServices
 {
     protected $model;
 
-    public function __construct(Media $model)
+    public function __construct(Category $model)
     {
         $this->model = $model;
     }
@@ -19,35 +18,10 @@ class MediaServices
         return $this->model::latest()->get();
     }
 
-    public function categories()
-    {
-        return Category::latest()->paginate(10);
-    }
-
-    public function list($id)
-    {
-        return $this->model->where('category_id',$id)->latest()->paginate(10);
-    }
-
     public function store($data)
     {
         $save = new $this->model;
 
-        if ($data['video_file']) {
-            $directory = 'videos';
-            $publicDirectory = public_path($directory);
-
-            if (!file_exists($publicDirectory)) {
-                mkdir($publicDirectory, 0755, true);
-            }
-            $filename = time() . '_' . $data['video_file']->getClientOriginalName();
-
-            $data['video_file']->move($publicDirectory, $filename);
-
-            $save->file = "$directory/$filename";
-        }
-
-        $save->category_id = $data['category_id'];
         $save->title = $data['title'];
         $save->description = $data['description'];
 
@@ -102,13 +76,6 @@ class MediaServices
     function destroy($id)
     {
         $destroy = $this->model::findOrFail($id);
-        if ($destroy->file) {
-            $oldFilePath = public_path($destroy->file);
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
-            }
-
             $destroy->delete();
-        }
     }
 }

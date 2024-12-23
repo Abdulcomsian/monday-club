@@ -28,7 +28,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/videos') || request()->is('user/videos/*') ? 'active' : '' }}"
-                        href="{{ route('user.videos.index') }}">
+                        href="{{ route('user.videos.categories') }}">
                         <i class="mdi mdi-video-outline"></i> <span>Videos</span>
                     </a>
                 </li>

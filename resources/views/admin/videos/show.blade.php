@@ -14,6 +14,11 @@
                 <div class="col-xl-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
+                        <div class="row mb-3">
+                                <div class="col-md-3 font-weight-bold">Category:</div>
+                                <div class="col-md-9">{{ $data->category->title }}</div>
+                            </div>
+
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Title:</div>
                                 <div class="col-md-9">{{ $data->title }}</div>

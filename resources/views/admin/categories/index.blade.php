@@ -1,12 +1,12 @@
 @extends('layouts.main')
-@section('title', 'Videos')
-@section('header', 'Videos')
+@section('title', 'Categories')
+@section('header', 'Categories')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
         <div class="container-fluid fluid">
             <div class="d-flex mb-3">
-                <a href="{{ route('admin.videos.create') }}">
+                <a href="{{ route('admin.categories.create') }}">
                     <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>
                         Add New
                     </button>
@@ -18,9 +18,7 @@
                 <thead>
                     <tr style="text-wrap: nowrap;">
                         <th class="text-center">#</th>
-                        <th class="text-center">Category</th>
                         <th class="text-center">Title</th>
-                        <th class="text-center">Video</th>
                         <th class="text-center">Description</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -30,9 +28,7 @@
                         @foreach ($data as $key => $value)
                             <tr>
                                 <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->category->title ?? 'N/A' }}</td>
                                 <td class="text-center">{{ $value->title }}</td>
-                                <td class="text-center"><a href="{{ asset($value->file) }}" download>Download Video</a></td>
                                 <td class="text-center">
                                     @php
                                         $fullDescription = $value->description;
@@ -46,15 +42,15 @@
                                     ) !!}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.videos.show', $value->id) }}">
+                                    <a href="{{ route('admin.categories.show', $value->id) }}">
                                         <button class="btn btn-sm btn-primary"><i class="mdi mdi-eye"></i> View</button>
                                     </a>
-                                    <a href="{{ route('admin.videos.edit', $value->id) }}">
+                                    <a href="{{ route('admin.categories.edit', $value->id) }}">
                                         <button class="btn btn-sm btn-info"><i class="mdi mdi-pencil"></i> Edit</button>
                                     </a>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target=".bs-delete-modal-center" data-id="{{ $value->id }}"
-                                        onclick="setVideoId(this)">
+                                        onclick="setCategoryId(this)">
                                         <i class="mdi mdi-delete"></i> Delete
                                     </button>
                                 </td>
@@ -69,7 +65,7 @@
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <form id="deleteForm" action="{{ route('admin.videos.destroy', ['id' => '__ID__']) }}"
+                        <form id="deleteForm" action="{{ route('admin.categories.destroy', ['id' => '__ID__']) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -140,18 +136,14 @@
                             width: '10%',
                             targets: 0
                         },
-                        {
-                            orderable: false,
-                            targets: [3, 4]
-                        }
                     ]
                 });
             });
 
-            function setVideoId(button) {
-                const videoId = button.getAttribute('data-id');
+            function setCategoryId(button) {
+                const categoryId = button.getAttribute('data-id');
                 const deleteForm = document.getElementById('deleteForm');
-                const actionUrl = "{{ route('admin.videos.destroy', ['id' => '__ID__']) }}".replace('__ID__', videoId);
+                const actionUrl = "{{ route('admin.categories.destroy', ['id' => '__ID__']) }}".replace('__ID__', categoryId);
                 deleteForm.setAttribute('action', actionUrl);
             }
 

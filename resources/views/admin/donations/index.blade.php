@@ -3,7 +3,7 @@
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <div class="container">
+        <div class="container-fluid fluid">
             <table id="mytable"
                 class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
                 data-ordering="false">

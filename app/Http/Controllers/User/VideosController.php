@@ -12,10 +12,17 @@ class VideosController extends Controller
     {
         $this->mediaServices = $mediaServices;
     }
-    function index()
+
+    function categories()
     {
-        $data = $this->mediaServices->index();
+        $data = $this->mediaServices->categories();
         return view('user.videos.index', compact('data'));
+    }
+
+    function list($id)
+    {
+        $data = $this->mediaServices->list($id);
+        return view('user.videos.list', compact('data'));
     }
 
     function show($id)

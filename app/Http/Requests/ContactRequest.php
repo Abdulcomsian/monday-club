@@ -29,17 +29,4 @@ class ContactRequest extends FormRequest
             'status' => 'nullable|string',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'Please enter a name.',
-            'email.required' => 'Please enter an email address.',
-            'email.email' => 'Please enter a valid email address.',
-            'contact.required' => 'Please enter a contact number.',
-            'contact.numeric' => 'The contact number must be a number.',
-            'contact.min' => 'The contact number must be at least 10 digits long.',
-            'note.string' => 'The note must be a string.',
-        ];
-    }
 }

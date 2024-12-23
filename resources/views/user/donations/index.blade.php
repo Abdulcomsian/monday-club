@@ -3,7 +3,7 @@
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <div class="container">
+        <div class="container-fluid fluid">
             <div class="d-flex mb-3">
                 <a href="{{ route('user.donations.create') }}">
                     <button type="button" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus icon"></i>

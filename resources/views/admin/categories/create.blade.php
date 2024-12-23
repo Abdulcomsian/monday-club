@@ -11,39 +11,16 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="{{ route('admin.videos.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
-                            <div class="col-xl-4 d-flex flex-column">
-                                    <label for="" class="form-label required">Category <span class="text-danger">*</span></label>
-                                    @error('title')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <select name="category_id" id="categorySelect" class="form-select" required>
-                                        <option value="">Select Category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->title ?? '' }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-xl-4 d-flex flex-column">
+                                <div class="col-xl-12 d-flex flex-column">
                                     <label for="" class="form-label required">Title <span class="text-danger">*</span></label>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <input type="text" class="form-control" name="title" placeholder="title here...">
-                                </div>
-
-                                <div class="col-xl-4 d-flex flex-column">
-                                    <label for="" class="form-label">Upload Video <span class="text-danger">*</span></label>
-                                    @error('companyImage')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <input class="form-control" type="file" name="video_file" accept=".mp4, .avi, .mov, .mkv">
-                                    <small class="text-danger">Note: Only mp4, avi, mov, and mkv formats are
-                                        allowed.</small>
                                 </div>
 
                                 <div class="col-xl-12">

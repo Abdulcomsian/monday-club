@@ -3,7 +3,7 @@
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <div class="container">
+        <div class="container-fluid fluid">
             <div class="row">
                 <div class="col-md-6">
                     <a href="{{ route('user.contacts.create') }}">

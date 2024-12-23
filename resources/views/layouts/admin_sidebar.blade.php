@@ -28,6 +28,15 @@
 
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}"
+                        href="{{ route('admin.categories.index') }}">
+                        <i class="mdi mdi-folder-outline"></i> <span>Categories</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}"
                         href="{{ route('admin.videos.index') }}">
                         <i class="mdi mdi-video-outline"></i> <span>Videos</span>

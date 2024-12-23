@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Models\Category;
 use App\Services\MediaServices;
 use App\Http\Requests\MediaRequest;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +24,8 @@ class VideosController extends Controller
 
     function create()
     {
-        return view('admin.videos.create');
+        $categories = Category::latest()->get();
+        return view('admin.videos.create', compact('categories'));
     }
 
     function store(MediaRequest $request)
@@ -49,7 +51,8 @@ class VideosController extends Controller
     function edit($id)
     {
         $data = $this->mediaServices->edit($id);
-        return view('admin.videos.edit', compact('data'));
+        $categories = Category::latest()->get();
+        return view('admin.videos.edit', compact('data','categories'));
     }
 
     function update(MediaRequest $request, $id)
