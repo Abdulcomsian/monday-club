@@ -35,7 +35,7 @@
                                     @endphp
                                     {!! Str::words(
                                         $value->description,
-                                        10,
+                                        5,
                                         '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#descriptionModal" data-description="' .
                                             htmlspecialchars($fullDescription, ENT_QUOTES) .
                                             '">Read More</a>',
@@ -132,10 +132,15 @@
                         [1, 'desc']
                     ],
 
-                    columnDefs: [{
-                            width: '10%',
-                            targets: 0
-                        },
+                    columnDefs: [
+                        {
+                        width: '15%',
+                        targets: 2
+                    },
+                    {
+                        width: '10%',
+                        targets: 3
+                    },
                     ]
                 });
             });

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Donations')
+@section('title', 'Sponsors')
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -12,6 +12,7 @@
                         <th class="text-center">#</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Amount</th>
+                        <th class="text-center">Date</th>
                         <th class="text-center">Note</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -23,14 +24,15 @@
                                 <td class="text-center">{{ $key + 1 }}</td>
                                 <td class="text-center">{{ $value->contact->name ?? 'N/A' }} <br> <small>{{ $value->contact->email ?? '' }}
                                 </td>
-                                <td class="text-center">{{ number_format($value->amount, 2) }}</td>
+                                <td class="text-center">{{ '$' . number_format($value->amount, 2) }}</td> <!-- Amount formatted with $ -->
+                                <td class="text-center">{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y') }}</td> <!-- Date formatted -->
                                 <td class="text-center">
                                     @php
                                         $fullNote = $value->note;
                                     @endphp
                                     {!! Str::words(
                                         $value->note,
-                                        10,
+                                        5,
                                         '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
                                             htmlspecialchars($fullNote, ENT_QUOTES) .
                                             '">Read More</a>',
@@ -85,9 +87,14 @@
                 order: [
                     [1, 'desc']
                 ],
-                columnDefs: [{
+                columnDefs: [
+                    {
+                        width: '15%',
+                        targets: 4
+                    },
+                    {
                         width: '10%',
-                        targets: 0
+                        targets: 5
                     },
                     {
                         orderable: false,

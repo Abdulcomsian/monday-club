@@ -15,7 +15,7 @@
                 @if ($data->isEmpty())
                 <div class="col-12">
                     <div class="alert alert-warning text-center" role="alert">
-                        No data available for this category.
+                        No data available for this module.
                     </div>
                 </div>
             @else

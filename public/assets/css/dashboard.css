@@ -125,3 +125,49 @@ body {
 .card {
     height: 100%;
 }
+
+.navbar-menu {
+    border-right: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-brand-box {
+    background: #f2f2f7;
+}
+
+#vertical-hover:hover + .logo-light .logo-large {
+    display: none;
+}
+
+#vertical-hover:hover + .logo-light .logo-small {
+    display: block;
+}
+
+:is([data-layout="vertical"], [data-layout="semibox"])[data-sidebar-size="sm"] .navbar-brand-box {
+    background-color: #f2f2f7;
+  }
+
+  .logo-responsive {
+    width: 230px; /* Set a specific width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Prevent distortion */
+    margin: 0 auto 20px; /* Center horizontally and add spacing below */
+    display: block; /* Ensure proper alignment */
+}
+.text-center .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensure the container takes up full height */
+}
+
+.loginCard {
+    height: fit-content !important;
+}
+
+#mytable td:nth-child(3) {
+    text-align: right;
+}
+
+

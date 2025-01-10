@@ -1,13 +1,10 @@
 <div class="app-menu navbar-menu">
     <div class="navbar-brand-box">
-        <a href="#" class="logo logo-light">
-            <span class="logo-lg">
-                {{-- <img src="{{ URL::asset('images/logos/logo.png') }}" height="40"> --}}
-                <h4 class="text-white mt-2">Monday Club</h4>
-            </span>
+        <a href="#" class="logo logo-light" style="width:200px;">
+            <img src="{{ URL::asset('images/logos/logo-large.png') }}" class="logo-large" style="width:100%; height: 100%; object-fit:cover;" alt="Logo">
+            <img src="{{ URL::asset('images/logos/logo-small.png') }}" class="logo-small" style="width:100%; height: 100%; object-fit:cover; display: none;" alt="Logo">
         </a>
-        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
-            id="vertical-hover">
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
@@ -20,7 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/dashboard') || request()->is('user/dashboard/*') ? 'active' : '' }}"
                         href="{{ route('user.dashboard') }}">
-                        <i class="mdi mdi-view-dashboard-outline"></i> <span>Dashboard</span>
+                        <i class="mdi mdi-view-dashboard-outline"></i> <span>Home</span>
                     </a>
                 </li>
             </ul>
@@ -65,7 +62,7 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('user/donations') || request()->is('user/donations/*') ? 'active' : '' }}"
                         href="{{ route('user.donations.index') }}">
-                        <i class="mdi mdi-heart-outline"></i> <span>Donations</span>
+                        <i class="mdi mdi-heart-outline"></i> <span>Sponsors</span>
                     </a>
                 </li>
             </ul>

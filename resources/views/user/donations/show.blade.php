@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Donations')
+@section('title', 'Sponsors')
 @section('header', 'Show')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -22,7 +22,12 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-3 font-weight-bold">Amount:</div>
-                                <div class="col-md-9">{{ number_format($data->amount, 2) }}</div>
+                                <div class="col-md-9">{{ '$' . number_format($data->amount, 2) }}</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 font-weight-bold">Date:</div>
+                                <div class="col-md-9">{{ \Carbon\Carbon::parse($data->created_at)->format('M d, Y') }}</div>
                             </div>
 
                             <div class="row mb-3">

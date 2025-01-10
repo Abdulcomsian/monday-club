@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Videos')
+@section('title', 'Sponsors')
 @section('header', 'Show')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">

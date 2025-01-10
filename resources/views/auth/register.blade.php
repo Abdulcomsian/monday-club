@@ -20,22 +20,21 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="index" class="d-inline-block auth-logo">
-                                    <img src="{{ URL::asset('build/images/logo-light.svg') }}" alt=""
+                                    <img src="{{ URL::asset('images/logos/logo-large.png') }}" alt=""
                                         height="60">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Monday Club App</p>
                         </div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-4">
+                        <div class="card mt-4 loginCard">
 
-                            <div class="card-body p-4">
+                            <div class="card-body">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary" style="color:#e30b0b !important;">Welcome Back !</h5>
-                                    <p class="text-muted">Sign in to continue to Monday Club App.</p>
+                                    <p class="text-muted">Sign up to continue to Monday Club Golf.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="{{ route('register') }}" method="POST">
@@ -109,9 +108,16 @@
                                         <div class="mt-4">
                                             <button class="btn btn-success w-100"
                                                 style="background: #e30b0b; border-color:#e30b0b;" type="submit">Sign
-                                                In</button>
+                                                Up</button>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <p class="text-muted">Already have account?
+                                        <a href="{{ route('login') }}" class="text-primary" style="color:#e30b0b !important;">
+                                            Sign in
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

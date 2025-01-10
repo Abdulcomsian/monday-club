@@ -20,7 +20,7 @@
                         <option value="not_contracted">Not Contacted</option>
                         <option value="positive_reply">Positive Reply</option>
                         <option value="negative_reply">Negative Reply</option>
-                        <option value="donated">Donated</option>
+                        <option value="donated">Sponsors</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -32,13 +32,13 @@
                 data-ordering="false">
                 <thead>
                     <tr style="text-wrap: nowrap;">
+                        <th class="text-center">Status</th>
                         <th class="text-center"><input type="checkbox" id="selectAll"></th>
                         <th class="text-center">#</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Contact#</th>
+                        <th class="text-center">Phone</th>
                         <th class="text-center">Note</th>
-                        <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -46,23 +46,6 @@
                     @isset($data)
                         @foreach ($data as $key => $value)
                             <tr class="no-records" data-id="{{ $value->id }}">
-                                <td class="text-center"><input type="checkbox" class="contact-checkbox"></td>
-                                <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->name }}</td>
-                                <td class="text-center">{{ $value->email }}</td>
-                                <td class="text-center">{{ $value->contact_no }}</td>
-                                <td class="text-center">
-                                    @php
-                                        $fullNote = $value->note;
-                                    @endphp
-                                    {!! Str::words(
-                                        $value->note,
-                                        10,
-                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
-                                            htmlspecialchars($fullNote, ENT_QUOTES) .
-                                            '">Read More</a>',
-                                    ) !!}
-                                </td>
                                 <td class="text-center">
                                     @switch($value->status)
                                         @case('contracted')
@@ -82,12 +65,29 @@
                                         @break
 
                                         @case('donated')
-                                            <span class="badge bg-primary">Donated</span>
+                                            <span class="badge bg-primary">Sponsors</span>
                                         @break
 
                                         @default
                                             <span class="badge bg-light">Unknown Status</span>
                                     @endswitch
+                                </td>
+                                <td class="text-center"><input type="checkbox" class="contact-checkbox"></td>
+                                <td class="text-center">{{ $key + 1 }}</td>
+                                <td class="text-center">{{ $value->name }}</td>
+                                <td class="text-center">{{ $value->email }}</td>
+                                <td class="text-center">{{ $value->contact_no }}</td>
+                                <td class="text-center">
+                                    @php
+                                        $fullNote = $value->note;
+                                    @endphp
+                                    {!! Str::words(
+                                        $value->note,
+                                        5,
+                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
+                                            htmlspecialchars($fullNote, ENT_QUOTES) .
+                                            '">Read More</a>',
+                                    ) !!}
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('user.contacts.show', $value->id) }}">
@@ -221,7 +221,7 @@
     <script>
         $(document).ready(function() {
             $('#mytable').DataTable({
-                autoWidth: false,
+                autoWidth: true,
                 responsive: true,
                 scrollX: true,
                 scrollCollapse: true,
@@ -230,9 +230,14 @@
                 order: [
                     [1, 'desc']
                 ],
-                columnDefs: [{
+                columnDefs: [
+                    {
+                        width: '15%',
+                        targets: 6
+                    },
+                    {
                         width: '10%',
-                        targets: 0
+                        targets: 7
                     },
                     {
                         orderable: false,

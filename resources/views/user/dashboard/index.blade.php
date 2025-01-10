@@ -82,9 +82,12 @@
                                 </div>
                             </div>
                             <div class="mt-4">
+                                <p>Contracted: <strong>{{ $ContractedReplies }}</strong></p>
+                                <p>Not Contracted: <strong>{{ $notContractedReplies }}</strong></p>
                                 <p>Positive Replies: <strong>{{ $positiveReplies }}</strong></p>
-                                <p>Mediate Replies: <strong>{{ $mediateReplies }}</strong></p>
                                 <p>Negative Replies: <strong>{{ $negativeReplies }}</strong></p>
+                                <p>Mediate Replies: <strong>{{ $mediateReplies }}</strong></p>
+                                <p>Sponsors: <strong>{{ $donatedReplies }}</strong></p>
                             </div>
                         </div>
                     </div>
@@ -105,10 +108,10 @@
                                 </div>
                             </div>
                             <div class="mt-4">
-                                <p>Current Week: <strong>${{ number_format($dollarsRaisedCurrentWeek, 2) }}</strong></p>
                                 <p>Current Month: <strong>${{ number_format($dollarsRaisedCurrentMonth, 2) }}</strong></p>
                                 <p>Past 6 Months: <strong>${{ number_format($dollarsRaisedPastSixMonths, 2) }}</strong></p>
                                 <p>Past Year: <strong>${{ number_format($dollarsRaisedPastYear, 2) }}</strong></p>
+                                <p>Total: <strong>${{ number_format($dollarsRaisedTotal, 2) }}</strong></p>
                             </div>
                         </div>
                     </div>

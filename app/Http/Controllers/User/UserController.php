@@ -21,14 +21,17 @@ class UserController extends Controller
         $emailsSentPastSixMonths = SentEmail::where('user_id', $userId)->where('created_at', '>=', now()->subMonths(6))->count();
         $emailsSentPastYear = SentEmail::where('user_id', $userId)->where('created_at', '>=', now()->subYear())->count();
 
+        $ContractedReplies = Contact::where('user_id', $userId)->where('status', 'contracted')->count();
+        $notContractedReplies = Contact::where('user_id', $userId)->where('status', 'not_contracted')->count();
         $positiveReplies = Contact::where('user_id', $userId)->where('status', 'positive_reply')->count();
-        $mediateReplies = Contact::where('user_id', $userId)->where('status', 'mediate_reply')->count();
         $negativeReplies = Contact::where('user_id', $userId)->where('status', 'negative_reply')->count();
+        $mediateReplies = Contact::where('user_id', $userId)->where('status', 'mediate_reply')->count();
+        $donatedReplies = Contact::where('user_id', $userId)->where('status', 'donated')->count();
 
-        $dollarsRaisedCurrentWeek = Donation::where('user_id', $userId)->where('created_at', '>=', now()->startOfWeek())->sum('amount');
         $dollarsRaisedCurrentMonth = Donation::where('user_id', $userId)->where('created_at', '>=', now()->startOfMonth())->sum('amount');
         $dollarsRaisedPastSixMonths = Donation::where('user_id', $userId)->where('created_at', '>=', now()->subMonths(6))->sum('amount');
         $dollarsRaisedPastYear = Donation::where('user_id', $userId)->where('created_at', '>=', now()->subYear())->sum('amount');
+        $dollarsRaisedTotal = Donation::where('user_id', $userId)->sum('amount');
 
         return view('user.dashboard.index', compact(
             'contactsManaged',
@@ -36,13 +39,16 @@ class UserController extends Controller
             'emailsSentCurrentMonth',
             'emailsSentPastSixMonths',
             'emailsSentPastYear',
+            'ContractedReplies',
+            'notContractedReplies',
             'positiveReplies',
-            'mediateReplies',
             'negativeReplies',
-            'dollarsRaisedCurrentWeek',
+            'mediateReplies',
+            'donatedReplies',
             'dollarsRaisedCurrentMonth',
             'dollarsRaisedPastSixMonths',
-            'dollarsRaisedPastYear'
+            'dollarsRaisedPastYear',
+            'dollarsRaisedTotal'
         ));
     }
 }

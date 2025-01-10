@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Donations')
+@section('title', 'Sponsors')
 @section('header', 'List')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -12,60 +12,61 @@
                 </a>
             </div>
             <table id="mytable"
-                class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
-                data-ordering="false">
-                <thead>
-                    <tr style="text-wrap: nowrap;">
-                        <th class="text-center">#</th>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Amount</th>
-                        <th class="text-center">Note</th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @isset($data)
-                        @foreach ($data as $key => $value)
-                            <tr class="no-records">
-                                <td class="text-center">{{ $key + 1 }}</td>
-                                <td class="text-center">{{ $value->contact->name ?? 'N/A' }} <br> <small>{{ $value->contact->email ?? '' }}
-                                </td>
-                                <td class="text-center">{{ number_format($value->amount, 2) }}</td>
-                                <td class="text-center">
-                                    @php
-                                        $fullNote = $value->note;
-                                    @endphp
-                                    {!! Str::words(
-                                        $value->note,
-                                        10,
-                                        '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
-                                            htmlspecialchars($fullNote, ENT_QUOTES) .
-                                            '">Read More</a>',
-                                    ) !!}
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('user.donations.show', $value->id) }}">
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="mdi mdi-eye"></i> View
-                                        </button>
-                                    </a>
-                                    <a href="{{ route('user.donations.edit', $value->id) }}">
-                                        <button class="btn btn-sm btn-info">
-                                            <i class="mdi mdi-pencil"></i> Edit
-                                        </button>
-                                    </a>
-
-                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target=".bs-delete-modal-center" data-id="{{ $value->id }}"
-                                        onclick="setDeleteId(this)">
-                                        <i class="mdi mdi-delete"></i> Delete
+            class="table table-bordered table-striped table-hover datatable datatable-Role cell-border display nowrap"
+            data-ordering="false">
+            <thead>
+                <tr style="text-wrap: nowrap;">
+                    <th class="text-center">#</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Amount</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Note</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @isset($data)
+                    @foreach ($data as $key => $value)
+                        <tr class="no-records">
+                            <td class="text-center">{{ $key + 1 }}</td>
+                            <td class="text-center">{{ $value->contact->name ?? 'N/A' }} <br> <small>{{ $value->contact->email ?? '' }}</small></td>
+                            <td class="text-center">{{ '$' . number_format($value->amount, 2) }}</td> <!-- Amount formatted with $ -->
+                            <td class="text-center">{{ \Carbon\Carbon::parse($value->created_at)->format('M d, Y') }}</td> <!-- Date formatted -->
+                            <td class="text-center">
+                                @php
+                                    $fullNote = $value->note;
+                                @endphp
+                                {!! Str::words(
+                                    $value->note,
+                                    5,
+                                    '... <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#noteModal" data-note="' .
+                                        htmlspecialchars($fullNote, ENT_QUOTES) .
+                                        '">Read More</a>',
+                                ) !!}
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ route('user.donations.show', $value->id) }}">
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="mdi mdi-eye"></i> View
                                     </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endisset
-                </tbody>
-            </table>
+                                </a>
+                                <a href="{{ route('user.donations.edit', $value->id) }}">
+                                    <button class="btn btn-sm btn-info">
+                                        <i class="mdi mdi-pencil"></i> Edit
+                                    </button>
+                                </a>
+
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target=".bs-delete-modal-center" data-id="{{ $value->id }}"
+                                    onclick="setDeleteId(this)">
+                                    <i class="mdi mdi-delete"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endisset
+            </tbody>
+        </table>
         </div>
     </div>
 
@@ -135,9 +136,14 @@
                 order: [
                     [1, 'desc']
                 ],
-                columnDefs: [{
+                columnDefs: [
+                    {
+                        width: '15%',
+                        targets: 4
+                    },
+                    {
                         width: '10%',
-                        targets: 0
+                        targets: 5
                     },
                     {
                         orderable: false,

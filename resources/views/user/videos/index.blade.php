@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Categories')
-@section('header', 'Categories')
+@section('title', 'Modules')
+@section('header', 'Modules')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 

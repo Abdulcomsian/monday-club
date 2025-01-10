@@ -60,6 +60,20 @@
 
         greetingElement.textContent = greetingMessage;
     });
+
+    const hoverButton = document.getElementById('vertical-hover');
+    const logoLarge = document.querySelector('.logo-large');
+    const logoSmall = document.querySelector('.logo-small');
+
+    hoverButton.addEventListener('mouseover', () => {
+        logoLarge.style.display = 'none';
+        logoSmall.style.display = 'block';
+    });
+
+    hoverButton.addEventListener('mouseout', () => {
+        logoLarge.style.display = 'block';
+        logoSmall.style.display = 'none';
+    });
 </script>
 
 @yield('script')
