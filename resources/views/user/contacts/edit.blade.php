@@ -33,7 +33,7 @@
                                 </div>
 
                                 <div class="col-xl-6 d-flex flex-column">
-                                    <label for="contact" class="form-label required">Contact# <span class="text-danger">*</span></label>
+                                    <label for="contact" class="form-label required">Phone<span class="text-danger">*</span></label>
                                     @error('contact')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-md-3 font-weight-bold">Contact#:</div>
+                                <div class="col-md-3 font-weight-bold">Phone:</div>
                                 <div class="col-md-9">{{ $data->contact_no }}</div>
                             </div>
 

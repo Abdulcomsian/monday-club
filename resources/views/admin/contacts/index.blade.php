@@ -14,7 +14,7 @@
                         <th class="text-center">Created By</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Contact#</th>
+                        <th class="text-center">Phone</th>
                         <th class="text-center">Note</th>
                         <th class="text-center">Actions</th>
                     </tr>

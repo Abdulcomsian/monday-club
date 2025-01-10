@@ -32,11 +32,11 @@
                                 </div>
 
                                 <div class="col-xl-4 d-flex flex-column">
-                                    <label for="contact" class="form-label required">Contact# <span class="text-danger">*</span></label>
+                                    <label for="contact" class="form-label required">Phone <span class="text-danger">*</span></label>
                                     @error('contact')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" name="contact" placeholder="contact here..."
+                                    <input type="text" class="form-control" name="contact" placeholder="phone here..."
                                            pattern="^\d{8,12}$" title="Contact number must be between 8 and 12 digits" required
                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="12">
                                 </div>
